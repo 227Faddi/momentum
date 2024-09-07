@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs', { title: 'Add', link: 'https://momentum.onrender.com/goal/add/' }) %>
+</head>
+<body>
+    <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
+        <div class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]">
+            <div class="flex flex-col min-h-screen">
+                <!-- Header Section -->
+				<%- include('partials/header.ejs') %>
+                <!-- Main Content Section -->
+                <div class="flex flex-col justify-center items-center flex-grow pb-5 px-5">
+                    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
+                        <form class="space-y-6" action="/goal/add" method="POST">
+                            <h1 class="text-xl font-medium text-gray-900 text-center">New Goal</h1>
+                            <div>
+                                <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Title</label>
+                                <input type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5" placeholder="Enter your goal" required />
+                            </div>
+                            <div>
+                                <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
+                                <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5">
+                                    <option value="personal" selected>Personal</option>
+                                    <option value="career">Career</option>
+                                    <option value="finance">Finance</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="timeFrame" class="block mb-2 text-sm font-medium text-gray-900">Time Frame</label>
+                                <select id="timeFrame" name="timeFrame" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5">
+                                    <option value="short-term" selected>Shorterm</option>
+                                    <option value="long-term">Longterm</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                                Create
+                            </button>
+                            <div class="text-sm font-medium text-gray-500 ">
+                                <a href="/dashboard" class="text-violet-700 hover:underline">Cancel</a>
+                            </div>
+                            <% if (locals.messages.errors) { %>
+                                <% messages.errors.forEach( el => { %>
+                                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                        <span class="block sm:inline"><%= el.msg %></span>
+                                    </div>
+                                <% }) %>    
+                            <% } %>
+                            <% if (locals.messages.success) { %>
+                                <% messages.success.forEach( el => { %>
+                                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                                        <span class="block sm:inline"><%= el.msg %></span>
+                                    </div>
+                                <% }) %>   
+                            <% } %>
+                        </form>
+                    </div>
+                </div>
+                <!-- Footer Section -->
+                <%- include('partials/footer.ejs') %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

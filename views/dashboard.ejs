@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('partials/head.ejs', { title: 'Dashboard', link: 'https://momentum.onrender.com/dashboard/' }) %>
+    </head>
+    <body>
+		<div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
+			<div class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]">
+				<div class="flex flex-col min-h-screen">
+					<!-- Header Section -->
+					<header class="py-5 text-center">
+						<div class="flex flex-col md:flex-row gap-5 justify-around items-center">
+							<h2 class="mb-0 text-3xl">
+								<a href="/">
+									<img src="/assets/img/logo.svg" alt="logo" class="w-10 inline-block"> Momentum
+								</a>
+							</h2>
+							<div class="flex content-between items-center gap-10 px-2">
+								<%= user.userName %>
+								<div>
+									<i class="fa-solid fa-fire"></i>
+									<%= user.points %>
+								</div>
+								<a href="/goal/add">Add</a>
+								<a href="/auth/logout">Logout</a>
+							</div>
+						</div>
+					</header>
+                    <!-- Main Content Section -->
+                    <div class="text-center my-10 flex flex-col items-center flex-grow pb-10 sm:px-10 px-5">	
+						<div class="lg:w-3/5 mt-5 w-full border rounded-lg shadow bg-gray-800 border-gray-700 opacity-80">
+							<ul class="text-sm font-medium text-center divide-x rounded-lg sm:flex divide-gray-600 text-white rtl:divide-x-reverse" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+								<li class="w-full">
+									<button id="stats-tab" data-tabs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="true" class="inline-block w-full p-4 rounded-ss-lg focus:outline-none bg-gray-700 hover:bg-gray-600">
+										Personal
+									</button>
+								</li>
+								<li class="w-full">
+									<button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false" class="inline-block w-full p-4 focus:outline-none bg-gray-700 hover:bg-gray-600">
+										Finance
+									</button>
+								</li>
+								<li class="w-full">
+									<button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="false" class="inline-block w-full p-4 rounded-se-lg focus:outline-none bg-gray-700 hover:bg-gray-600">
+										Career
+									</button>
+								</li>
+							</ul>
+							<div id="fullWidthTabContent" class="border-t border-gray-600 min-h-96">
+								<div class="hidden p-4 rounded-lg md:p-8" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+									<h2 class="mb-5 text-2xl font-extrabold tracking-tight text-white">
+										Personal
+									</h2>
+									<%- include('partials/goals.ejs',  { category: 'personal' }) %>
+								</div>
+								<div class="hidden p-4 rounded-lg md:p-8" id="about" role="tabpanel" aria-labelledby="about-tab">
+									<h2 class="mb-5 text-2xl font-extrabold tracking-tight text-white">
+										Finance
+									</h2>
+									<%- include('partials/goals.ejs',  { category: 'finance' }) %>
+								</div>
+								<div class="hidden p-4 rounded-lg md:p-8" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+									<h2 class="mb-5 text-2xl font-extrabold tracking-tight text-white">
+										Career
+									</h2>
+									<%- include('partials/goals.ejs',  { category: 'career' }) %>
+								</div>
+							</div>
+						</div>						
+                    </div>
+                    <!-- Footer -->
+                    <%- include('partials/footer.ejs') %>
+                </div>
+            </div>
+        </div>
+        <script src='js/main.js'></script>
+    </body>
+</html>
