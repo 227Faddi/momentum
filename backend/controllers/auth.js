@@ -6,7 +6,7 @@ import asyncHandler from 'express-async-handler';
 // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
+    expiresIn: '7d',
   })
 }
 
