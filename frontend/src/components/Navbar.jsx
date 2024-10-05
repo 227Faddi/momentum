@@ -42,6 +42,7 @@ const NavBar = ({ user, setUser, setToken }) => {
                             Momentum
                     </Link>
                 </h2>
+                
                 <div className="flex content-between items-center gap-10 px-2">
                     { elements }
                 </div>
