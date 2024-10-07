@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
 import { logout } from '../services/api/auth';
 
-const NavBar = ({ user, setUser, setToken }) => {
+const NavBar = ({ user, token, setUser, setToken }) => {
     const navigate = useNavigate()
 
     const handleLogout = async () => {
-        const response = await logout()
+        const response = await logout(token)
         if(response.ok){
             setUser(null)
             setToken(null)

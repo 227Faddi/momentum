@@ -14,6 +14,7 @@ const HomePage = () => {
     useEffect(() => {
       if(socialAuth){
         const getUser = async () => {
+            console.log('stay')
             await user()
             setUser(JSON.parse(localStorage.getItem('user')))
             setToken(localStorage.getItem('token'))

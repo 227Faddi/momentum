@@ -63,6 +63,7 @@ export const user = async () => {
       },
     })
     const data = await response.json()
+    console.log(data)
     if(data.status === 'error'){
       return toast.error(data.message)
     }
@@ -76,12 +77,12 @@ export const user = async () => {
 };
 
 // LOGOUT
-export const logout = async () => {
+export const logout = async (token) => {
   try{
     await fetch(`${serverUrl}/api/auth/logout`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Authorization': `Bearer ${token}`,
       },
     });
     localStorage.removeItem('user');
