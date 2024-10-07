@@ -24,7 +24,7 @@ const NavBar = ({ user, setUser, setToken }) => {
                     <FaFire />
                     { user && user.points }
                 </div>
-                <a href="/add-goal">Add</a>
+                <Link to="/add-goal">Add</Link>
                 <button onClick={handleLogout}>Logout</button>
             </>
         )
