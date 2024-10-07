@@ -32,7 +32,7 @@ export default {
 
   // SOCIALS
   googleCallback: asyncHandler( async (req, res) => {
-    res.redirect(`${process.env.CLIENT_URL}/?google${req.user}`);
+    res.redirect(`${process.env.CLIENT_URL}/?google`)
   }),
   githubCallback: asyncHandler( async (req, res) => {
     res.redirect(`${process.env.CLIENT_URL}/?github`)
