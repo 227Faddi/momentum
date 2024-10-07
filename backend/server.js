@@ -29,11 +29,6 @@ app.use(
         origin: process.env.CLIENT_URL,
         methods: 'GET, POST, PUT, DELETE',
         credentials: true,
-        cookie: {
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            secure: true, //Enable when deployment OR when not using localhost, this wont work without https
-            sameSite: "none", //Enable when deployment OR when not using localhost, We're not on the same site, we're using different site so the cookie need to effectively transfer from Backend to Frontend
-        }
     })
 )
 
@@ -42,7 +37,12 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_STRING })
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
+    cookie: {
+        secure: process.env.NODE_ENV === 'production', //Enable when deployment OR when not using localhost, this wont work without https
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        sameSite: "none", //Enable when deployment OR when not using localhost, We're not on the same site, we're using different site so the cookie need to effectively transfer from Backend to Frontend
+    }
 }))
   
 // Passport
