@@ -78,12 +78,16 @@ export const user = async () => {
 // LOGOUT
 export const logout = async (token) => {
   try{
-    await fetch(`${serverUrl}/auth/logout`, {
+    const response = await fetch(`${serverUrl}/auth/logout`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
     });
+    const data = response.json()
+    if(data.status === 'error'){
+      return toast.error(data.message)
+    }
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     return { ok: true}
