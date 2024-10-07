@@ -14,19 +14,16 @@ const HomePage = () => {
     useEffect(() => {
       if(socialAuth){
         const getUser = async () => {
-            console.log('stay')
             await user()
             setUser(JSON.parse(localStorage.getItem('user')))
             setToken(localStorage.getItem('token'))
             if(token){
                 navigate('/dashboard/personal')
-            } else{
-                navigate(0)
             }
         }
         getUser()
       }
-    }, []);
+    }, [socialAuth]);
 
     return (
         <div className="text-center flex flex-col justify-center items-center flex-grow pb-5 my-10">
