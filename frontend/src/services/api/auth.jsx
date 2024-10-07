@@ -13,12 +13,15 @@ export const login = async (credentials) => {
       body: JSON.stringify(credentials)
     })
     const data = await response.json()
+    console.log(data)
+
     if(data.status === 'error'){
       return toast.error(data.message)
     }
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data));
+
     return { ok: true}
   } catch(err){
     return toast.error(`An error occurred. ${err.message}`)
@@ -63,7 +66,6 @@ export const user = async () => {
       },
     })
     const data = await response.json()
-    console.log(data)
     if(data.status === 'error'){
       return toast.error(data.message)
     }
@@ -84,14 +86,15 @@ export const logout = async (token) => {
         'Authorization': `Bearer ${token}`,
       },
     });
-    const data = response.json()
+    const data = await response.json()
     if(data.status === 'error'){
       return toast.error(data.message)
     }
+    toast.success(data.message)
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     return { ok: true}
-  } catch{
+  } catch(err){
     return toast.error(`An error occurred. ${err.message}`)
   }
 };

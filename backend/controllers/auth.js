@@ -60,11 +60,13 @@ export default {
   // LOGOUT
   logout: (req, res, next) => {
     req.logout((error) => {
-      if (error) {
-        res.status(400).json({ status: 'error', message: 'Login failed. Please try again'})
-        return next(error)
-      }
-      res.redirect(`${process.env.CLIENT_URL}`);
+      req.session.destroy((err) => {
+        if (error){ 
+          return res.status(400).json({ status: 'error', message: 'Login failed. Please try again'})
+        }
+        req.user = null;
+        res.status(200).json({ status: 'success', message: 'Logout completed successfully'})
+      });
     })
   },  
 
