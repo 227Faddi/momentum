@@ -31,12 +31,12 @@ export default {
   }),
 
   // SOCIALS
-  googleCallback: (req, res) => {
-    res.redirect(`${process.env.CLIENT_URL}/?google`);
-  },
-  githubCallback: (req, res) => {
+  googleCallback: asyncHandler( async (req, res) => {
+    res.redirect(`${process.env.CLIENT_URL}/?google${req.user}`);
+  }),
+  githubCallback: asyncHandler( async (req, res) => {
     res.redirect(`${process.env.CLIENT_URL}/?github`)
-  },
+  }),
 
   // LOGIN
   login: asyncHandler(async (req, res) => {
@@ -58,7 +58,7 @@ export default {
   }),
   
   // LOGOUT
-  logout: (req, res, next) => {
+  logout: asyncHandler( async (req, res, next) => {
     req.logout((error) => {
       req.session.destroy((err) => {
         if (error){ 
@@ -68,7 +68,7 @@ export default {
         res.status(200).json({ status: 'success', message: 'Logout completed successfully'})
       });
     })
-  },  
+  }),  
 
   // SIGNUP
   signup: asyncHandler(async (req, res) => {

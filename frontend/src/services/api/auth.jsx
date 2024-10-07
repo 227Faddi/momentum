@@ -13,7 +13,6 @@ export const login = async (credentials) => {
       body: JSON.stringify(credentials)
     })
     const data = await response.json()
-    console.log(data)
 
     if(data.status === 'error'){
       return toast.error(data.message)
@@ -65,6 +64,7 @@ export const user = async () => {
         "Access-Control-Allow-Credentials": true,
       },
     })
+    
     const data = await response.json()
     if(data.status === 'error'){
       return toast.error(data.message)
