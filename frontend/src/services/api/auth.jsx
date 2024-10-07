@@ -66,9 +66,7 @@ export const user = async () => {
     })
     const data = await response.json()
     if(data.status === 'error'){
-      // return toast.error(data.message)
-      console.log(data.message[0])
-      console.log(data.message[1])
+      return toast.error(data.message)
     }
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));

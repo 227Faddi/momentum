@@ -25,8 +25,7 @@ export default {
         token: generateToken(user._id),
       });
     } else{
-      res.status(400).json({ status: 'error', message: [req.user, req.session] })
-      // res.status(400).json({ status: 'error', message: 'Login Failed. Please try again' })
+      res.status(400).json({ status: 'error', message: 'Login Failed. Please try again' })
       throw new Error('User not present')
     }
   }),
