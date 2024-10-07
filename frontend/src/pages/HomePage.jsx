@@ -26,7 +26,7 @@ const HomePage = () => {
         }
         getUser()
       }
-    }, [socialAuth]);
+    }, []);
 
     return (
         <div className="text-center flex flex-col justify-center items-center flex-grow pb-5 my-10">

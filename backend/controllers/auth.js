@@ -60,7 +60,10 @@ export default {
   // LOGOUT
   logout: (req, res, next) => {
     req.logout((error) => {
-      if (error) {return next(error)}
+      if (error) {
+        res.status(400).json({ status: 'error', message: 'Login failed. Please try again'})
+        return next(error)
+      }
       res.redirect(`${process.env.CLIENT_URL}`);
     })
   },  

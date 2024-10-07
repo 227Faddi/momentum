@@ -78,7 +78,7 @@ export const user = async () => {
 // LOGOUT
 export const logout = async (token) => {
   try{
-    await fetch(`${serverUrl}/api/auth/logout`, {
+    await fetch(`${serverUrl}/auth/logout`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
