@@ -33,13 +33,6 @@ app.use(
         credentials: true,
     })
 )
-
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
   
 
 // Sessions
@@ -48,7 +41,6 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
-    proxy: true,
     cookie: {
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
