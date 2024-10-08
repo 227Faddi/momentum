@@ -46,7 +46,6 @@ app.use(session({
         maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
         sameSite: "none",
         httpOnly: false,
-        domain: '.onrender.com'
     }    
 }))
   
