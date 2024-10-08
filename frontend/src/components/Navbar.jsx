@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
 import { logout } from '../services/api/auth';
+import logo from '../assets/img/logo.svg';
 
 const NavBar = ({ user, token, setUser, setToken }) => {
     const navigate = useNavigate()
@@ -19,7 +20,9 @@ const NavBar = ({ user, token, setUser, setToken }) => {
     if(location.pathname.startsWith('/dashboard')){
         elements = (
             <>
-                { user && user.username }
+                <h2>
+                    { user && user.username }
+                </h2>
                 <div className='flex items-center gap-1'>
                     <FaFire />
                     { user && user.points }
@@ -31,11 +34,11 @@ const NavBar = ({ user, token, setUser, setToken }) => {
     }
     return (
         <nav className="py-5 text-center">
-            <div className="md:flex justify-around items-center">
+            <div className="sm:flex justify-around items-center">
                 <h2 className="mb-0 text-3xl cursor-pointer">
                     <Link to="/">
                         <img
-                            src="../src/assets/img/logo.svg"
+                            src={logo}
                             alt="logo"
                             className="w-10 inline-block mr-2"
                         />
@@ -43,7 +46,7 @@ const NavBar = ({ user, token, setUser, setToken }) => {
                     </Link>
                 </h2>
                 
-                <div className="flex content-between items-center gap-10 px-2">
+                <div className="flex justify-center gap-10 px-2 sm:pt-0 pt-8">
                     { elements }
                 </div>
             </div>

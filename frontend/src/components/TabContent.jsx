@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 const TabContent = ({ category }) => {
   return (
     <div
-      className="p-4 rounded-lg md:p-8"
+      className="p-4 rounded-lg sm:p-8"
     >
         <h2 className="mb-5 text-2xl font-extrabold tracking-tight text-white">
           { category }
         </h2>
-        <div className="flex flex-col md:flex-row justify-around items-center md:items-start gap-5">
+        <div className="flex flex-col sm:flex-row justify-around items-center sm:items-start gap-5">
           <DisplayGoals
             category={ category }
             timeframe='Shorterm'

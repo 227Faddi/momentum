@@ -13,7 +13,7 @@ const DisplayGoals = ( { category, timeframe } ) => {
     }
 
     return (
-        <div>
+        <div className='mt-8 sm:mt-0'>
             <p className="text-xl mb-3 font-extrabold tracking-tight text-white">
                 { timeframe }
             </p>
