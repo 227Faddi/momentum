@@ -17,7 +17,6 @@ connectDB()
 
 passportConfig(passport)
 
-
 // Logging
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
@@ -40,10 +39,16 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_STRING })
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
+    cookie: {
+        httpOnly: true,
+        secure: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
+        sameSite: "none",
+    }    
 }))
   
-app.set('trust proxy');
+app.set('trust proxy', 1);
 
 // Passport
 app.use(passport.initialize())
