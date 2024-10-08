@@ -6,9 +6,9 @@ export const login = async (credentials) => {
   try{
     const response = await fetch(`${serverUrl}/auth/login`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        credentials: 'include',
       },
       body: JSON.stringify(credentials)
     })
@@ -32,9 +32,9 @@ export const signup = async (credentials) => {
   try{
     const response = await fetch(`${serverUrl}/auth/signup`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        credentials: 'include',
       },
       body: JSON.stringify(credentials)
     })
@@ -57,11 +57,9 @@ export const user = async () => {
   try{
     const response = await fetch(`${serverUrl}/auth/login/success`, {
       method: "GET",
-      credentials: "include",
+      credentials: 'include',
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
       },
     })
     const data = await response.json()
@@ -81,6 +79,7 @@ export const logout = async (token) => {
   try{
     const response = await fetch(`${serverUrl}/auth/logout`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Authorization': `Bearer ${token}`,
       },
