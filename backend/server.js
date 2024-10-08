@@ -15,6 +15,9 @@ dotenv.config({path: './config/.env'})
 const app = express()
 connectDB()
 
+passportConfig(passport)
+
+
 // Logging
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
@@ -37,13 +40,12 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING })
 }))
   
-app.set('trust proxy', 1);
+app.set('trust proxy');
 
 // Passport
-passportConfig(passport)
 app.use(passport.initialize())
 app.use(passport.session())
 

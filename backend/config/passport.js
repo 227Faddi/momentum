@@ -11,7 +11,7 @@ export default function(passport){
           clientSecret: process.env.GOOGLE_CLIENT_SECRET,
           callbackURL: `${process.env.BASE_URL}/auth/google/callback`,
         },
-        async (accessToken, refreshToken, profile, email, done) => {
+        async (accessToken, refreshToken, email, done) => {
             const newUser = {
                 googleId: email.id,
                 username: email.displayName,
@@ -62,6 +62,7 @@ export default function(passport){
             }
         )
     )
+  
   
     passport.serializeUser((user, done) => {
       done(null, user.id)
