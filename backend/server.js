@@ -38,10 +38,6 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
-    cookie: {
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: "none",
-    }
 }))
   
 app.set('trust proxy', 1);
