@@ -45,6 +45,7 @@ app.use(session({
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
         sameSite: "none",
+        domain: '.onrender.com'
     }    
 }))
   
