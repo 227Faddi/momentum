@@ -11,33 +11,6 @@ const generateToken = (id) => {
 }
 
 export default {
-  // GET USER 
-  user: asyncHandler(async (req, res) => {
-    const user = req.user
-    if (user) {
-      res.status(200).json({
-        user: {
-          _id: user.id,
-          username: user.username,
-          email: user.email,
-          points: user.points,
-        },
-        token: generateToken(user._id),
-      });
-    } else{
-      res.status(400).json({ status: 'error', message: 'Login Failed. Please try again' })
-      throw new Error('User not present')
-    }
-  }),
-
-  // SOCIALS
-  googleCallback: asyncHandler( async (req, res) => {
-    res.redirect(`${process.env.CLIENT_URL}/?google`)
-  }),
-  githubCallback: asyncHandler( async (req, res) => {
-    res.redirect(`${process.env.CLIENT_URL}/?github`)
-  }),
-
   // LOGIN
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body
@@ -57,19 +30,6 @@ export default {
     }
   }),
   
-  // LOGOUT
-  logout: asyncHandler( async (req, res, next) => {
-    req.logout((error) => {
-      req.session.destroy((err) => {
-        if (error){ 
-          return res.status(400).json({ status: 'error', message: 'Login failed. Please try again'})
-        }
-        req.user = null;
-        res.status(200).json({ status: 'success', message: 'Logout completed successfully'})
-      });
-    })
-  }),  
-
   // SIGNUP
   signup: asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;

@@ -2,26 +2,34 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import { login } from '../services/api/auth';
+import Spinner from '../components/Spinner';
 
 const LoginPage = () => {
     const { user, setUser, setToken } = useOutletContext()
     const navigate = useNavigate()
 
+    const [loading, setLoading] = useState(false)
     const [ email, setEmail ] = useState('guest@gmail.com');
     const [ password, setPassword ] = useState('helloworld');
 
     const postLogin = async (e) => {
+        setLoading(true)
         e.preventDefault()
         const credentials = {
             email: email,
             password: password
         }
         const response = await login(credentials)
+        setLoading(false)
         if(response.ok){
             setUser(JSON.parse(localStorage.getItem('user')))
             setToken(localStorage.getItem('token'))
             navigate('/dashboard/personal')
         }
+    }
+
+    if(loading){
+        return <Spinner loading={loading} size={1} color='#000' /> 
     }
 
     return (
@@ -44,6 +52,7 @@ const LoginPage = () => {
                             type="email"
                             name="email"
                             id="email"
+                            placeholder="guest@gmail.com"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5  "
                             required={true}
                         />

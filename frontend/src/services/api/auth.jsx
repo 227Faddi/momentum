@@ -75,24 +75,8 @@ export const user = async () => {
 };
 
 // LOGOUT
-export const logout = async (token) => {
-  try{
-    const response = await fetch(`${serverUrl}/auth/logout`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    const data = await response.json()
-    if(data.status === 'error'){
-      return toast.error(data.message)
-    }
-    toast.success(data.message)
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    return { ok: true}
-  } catch(err){
-    return toast.error(`An error occurred. ${err.message}`)
-  }
+export const logout = (token) => {
+  toast.success('Logout completed successfully')
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
 };

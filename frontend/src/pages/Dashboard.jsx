@@ -81,7 +81,7 @@ const Dashboard = () => {
                     className="border-t border-gray-600 min-h-96"
                 >
                     { loading 
-                        ? <Spinner loading={loading}/>
+                        ? <Spinner loading={loading} size={450} color='#FFF' />
                         : <Outlet context={{ user, setUser, token, serverUrl, goals, handleDeleteGoal, handleCompleteGoal}}/>
                     }
                 </div>

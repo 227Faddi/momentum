@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import { signup } from '../services/api/auth';
+import Spinner from '../components/Spinner';
+
 
 const SignUpPage = () => {
     const { serverUrl, setUser, setToken } = useOutletContext();
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(false)
     const [ username, setUsername ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ confirmPassword, setConfirmPassword ] = useState('');
 
     const postSignup = async (e) => {
+        setLoading(true)
         e.preventDefault()
+
         const credentials = {
             username: username,
             email: email,
@@ -20,11 +25,16 @@ const SignUpPage = () => {
         }
 
         const response = await signup(credentials)
+        setLoading(false)
         if(response.ok){
             setUser(JSON.parse(localStorage.getItem('user')))
             setToken(localStorage.getItem('token'))
             navigate('/dashboard/personal')
         }
+    }
+
+    if(loading){
+        return <Spinner loading={loading} size={1} color='#000' /> 
     }
 
     return (
@@ -104,19 +114,19 @@ const SignUpPage = () => {
                             required={true}
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                    >
-                        Sign up
+                    <button 
+                        type="submit" 
+                        className="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" 
+                    > 
+                        Sign up 
                     </button>
                     <div className="text-sm font-medium text-gray-500 ">
-                        Already have an account? 
+                        Already have an account?{" "}
                         <Link
                             to='/login'
                             className="text-violet-700 hover:underline"
                         >
-                            Login here
+                            Login
                         </Link>
                     </div>
                 </form>

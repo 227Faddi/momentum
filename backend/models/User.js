@@ -1,16 +1,6 @@
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
-    googleId:{
-        type: String,
-        required: false,
-        sparse: true
-    },
-    githubId:{
-        type: String,
-        required: false,
-        sparse: true
-    },
     username:{
         type: String,
         unique: true,

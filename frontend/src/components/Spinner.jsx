@@ -8,10 +8,8 @@ const override = {
 const Spinner = ({ loading }) => {
   return (
     <ScaleLoader
-      color='#FFF'
       loading={loading}
       cssOverride={override}
-      size={450}
     />
   );
 };
