@@ -36,7 +36,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center flex-grow pb-5 my-10 px-5">
+        <div className="flex flex-col justify-center items-center flex-grow pb-5 my-10 px-12">
             <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
                 <form className="space-y-6" onSubmit={postLogin}>
                     <h1 className="text-xl font-medium text-gray-900">

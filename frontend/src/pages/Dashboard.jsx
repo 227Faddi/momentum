@@ -42,7 +42,7 @@ const Dashboard = () => {
     };
       
     return (
-        <div className="text-center my-5 flex flex-col items-center flex-grow pb-10 sm:px-10 px-5">
+        <div className="text-center my-5 flex flex-col items-center flex-grow pb-10 px-12">
             <div className="lg:w-3/5 mt-5 w-full border rounded-lg shadow bg-gray-800 border-gray-700 opacity-80">
                 <ul
                     className="text-sm font-medium text-center divide-x rounded-lg sm:flex divide-gray-600 text-white rtl:divide-x-reverse"
