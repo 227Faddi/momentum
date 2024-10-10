@@ -1,4 +1,4 @@
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
 import { logout } from '../services/api/auth';
@@ -6,6 +6,7 @@ import logo from '../assets/img/logo.svg';
 
 const NavBar = ({ user, token, setUser, setToken }) => {
     const navigate = useNavigate()
+    const location = useLocation();
 
     const handleLogout = async () => {
         setUser(null)
@@ -13,11 +14,10 @@ const NavBar = ({ user, token, setUser, setToken }) => {
         logout(token)
         navigate('/')
     };
-
-    const location = useLocation();
-    let elements
+    
+    let info
     if(location.pathname.startsWith('/dashboard')){
-        elements = (
+        info = (
             <>
                 <h2>
                     { user && user.username }
@@ -31,6 +31,7 @@ const NavBar = ({ user, token, setUser, setToken }) => {
             </>
         )
     }
+
     return (
         <nav className="py-5 text-center">
             <div className="sm:flex justify-around items-center">
@@ -44,9 +45,8 @@ const NavBar = ({ user, token, setUser, setToken }) => {
                             Momentum
                     </Link>
                 </h2>
-                
                 <div className="flex justify-center gap-10 px-2 sm:pt-0 pt-8">
-                    { elements }
+                    { info }
                 </div>
             </div>
         </nav>

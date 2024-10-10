@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useOutletContext, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 
 const EnsureGuest = () => {
     const { user, setUser, token, setToken, serverUrl } = useOutletContext();

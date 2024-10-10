@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { addGoal } from '../services/api/goals';
+import { SubmitButton } from '../components/Button';
 
 const AddGoalPage = () => {
   const navigate = useNavigate();
-  const { user, serverUrl, token } = useOutletContext();
+  const { user, token } = useOutletContext();
+
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('personal');
   const [timeFrame, setTimeFrame] = useState('shorterm');
 
   const handleAdd = async (e) => {
     e.preventDefault()
+    
     const newGoal = {
       title: title,
       category: category,
@@ -88,12 +90,7 @@ const AddGoalPage = () => {
               <option value="longterm">Longterm</option>
             </select>
           </div>
-          <button
-            type="submit"
-            className="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          >
-            Add Goal
-          </button>
+          <SubmitButton text={'Add Goal'}/>
           <div className="text-sm font-medium text-gray-500 ">
             <a href="/dashboard" className="text-violet-700 hover:underline">
               Cancel

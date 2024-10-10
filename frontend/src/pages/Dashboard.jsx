@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import { getGoals, deleteGoal, completeGoal } from '../services/api/goals';
@@ -11,7 +11,7 @@ const Dashboard = () => {
     const location = useLocation();
     const path = location.pathname
     let tabClass =`inline-block w-full p-4 focus:outline-none hover:bg-gray-600`
-
+    
     // GET GOAL FETCH
     const [loading, setLoading] = useState(true)
     const [goals, setGoals] = useState([])

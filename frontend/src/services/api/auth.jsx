@@ -42,7 +42,6 @@ export const signup = async (credentials) => {
     if(data.status === 'error'){
       return toast.error(data.message)
     }
-
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data));
     return { ok: true}
@@ -50,29 +49,6 @@ export const signup = async (credentials) => {
     return toast.error(`An error occurred. ${err.message}`)
   }
 }
-
-
-// GET USER FOR SOCIALS AUTH
-export const user = async () => {
-  try{
-    const response = await fetch(`${serverUrl}/auth/login/success`, {
-      method: "GET",
-      credentials: 'include',
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const data = await response.json()
-    if(data.status === 'error'){
-      return toast.error(data.message)
-    }
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
-    return { ok: true}
-  } catch(err){
-    return toast.error(`An error occurred. ${err.message}`)
-  }
-};
 
 // LOGOUT
 export const logout = (token) => {

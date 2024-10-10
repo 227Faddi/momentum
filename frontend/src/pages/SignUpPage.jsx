@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import { signup } from '../services/api/auth';
+import { SubmitButton } from '../components/Button';
 import Spinner from '../components/Spinner';
 
 
 const SignUpPage = () => {
-    const { serverUrl, setUser, setToken } = useOutletContext();
+    const { setUser, setToken } = useOutletContext();
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false)
@@ -114,12 +115,7 @@ const SignUpPage = () => {
                             required={true}
                         />
                     </div>
-                    <button 
-                        type="submit" 
-                        className="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" 
-                    > 
-                        Sign up 
-                    </button>
+                    <SubmitButton text='Sign up' />
                     <div className="text-sm font-medium text-gray-500 ">
                         Already have an account?{" "}
                         <Link

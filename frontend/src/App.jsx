@@ -1,5 +1,4 @@
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, useNavigate, useLocation, redirect } from 'react-router-dom';
-import { useEffect, useState } from 'react'
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 // Pages
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
@@ -17,14 +16,9 @@ import EnsureAuth from './utils/EnsureAuth';
 import EnsureGuest from './utils/EnsureGuest';
 
 function App() { 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || null))
-  const [token, setToken] = useState(localStorage.getItem('token') || null)
-
-  const serverUrl = import.meta.env.VITE_SERVER_URL;
-
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={ <MainLayout user={user} setUser={setUser} serverUrl={serverUrl} token={token} setToken={setToken} /> } >
+      <Route element={ <MainLayout /> } >
         <Route element={ <EnsureGuest/> }>
           <Route path='/' element={ <HomePage /> } />
           <Route path='/login' element={ <LoginPage /> } />

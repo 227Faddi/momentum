@@ -1,6 +1,4 @@
 import DisplayGoals from './DisplayGoals';
-import { useOutletContext } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 const TabContent = ({ category }) => {
   return (

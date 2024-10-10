@@ -11,12 +11,10 @@ dotenv.config({path: './config/.env'})
 const app = express()
 connectDB()
 
-// Logging
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
 }
 
-// Body parser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
@@ -32,5 +30,5 @@ app.use('/api/goals', goalRoutes)
 app.use('/auth', authRoutes)
  
 app.listen(process.env.PORT, ()=>{
-    console.log('Server is running, you better catch it!')
+    console.log(`Server is running on port ${process.env.PORT}`)
 })    

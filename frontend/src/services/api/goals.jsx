@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify';
 const serverUrl = import.meta.env.VITE_SERVER_URL;
+import { toast } from 'react-toastify';
 
 // GET GOAL FETCH
 export const getGoals = async (token) => {
@@ -57,7 +57,6 @@ export const completeGoal = async (id, token) => {
         return toast.error(`An error occurred. ${err.message}`)
     }
 };
-
 
 export const addGoal = async (newGoal, token) => {
     try{

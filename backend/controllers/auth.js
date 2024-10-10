@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import asyncHandler from 'express-async-handler';
 
-// Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '7d',
@@ -11,10 +10,8 @@ const generateToken = (id) => {
 }
 
 export default {
-  // LOGIN
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body
-    // Check for user email
     const user = await User.findOne({ email })
     if (user && (bcrypt.compare(password, user.password))) {
       res.json({
@@ -30,7 +27,6 @@ export default {
     }
   }),
   
-  // SIGNUP
   signup: asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
   

@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
 import { useOutletContext, useNavigate, useLocation } from 'react-router-dom';
 
 const DisplayGoals = ( { category, timeframe } ) => {
-    
+
     const { goals, handleDeleteGoal, handleCompleteGoal } = useOutletContext();
-    const navigate = useNavigate();
-    const location = useLocation();
 
     let filteredGoals = []
     if(Array.isArray(goals)){
@@ -18,7 +15,7 @@ const DisplayGoals = ( { category, timeframe } ) => {
                 { timeframe }
             </p>
             <ul className="w-60 text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white">
-            {Array.isArray(filteredGoals) && filteredGoals.length > 0 ? (
+                {Array.isArray(filteredGoals) && filteredGoals.length > 0 ? (
                     filteredGoals.map(goal => (
                         <li key={goal._id} className="w-full border-b rounded-t-lg border-gray-600">
                             <div className="flex items-center px-3">

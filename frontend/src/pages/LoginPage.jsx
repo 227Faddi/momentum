@@ -1,24 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import { login } from '../services/api/auth';
 import Spinner from '../components/Spinner';
+import { SubmitButton } from '../components/Button';
 
 const LoginPage = () => {
-    const { user, setUser, setToken } = useOutletContext()
+    const { setUser, setToken } = useOutletContext()
     const navigate = useNavigate()
 
     const [loading, setLoading] = useState(false)
-    const [ email, setEmail ] = useState('guest@gmail.com');
-    const [ password, setPassword ] = useState('helloworld');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
 
     const postLogin = async (e) => {
         setLoading(true)
+        
         e.preventDefault()
         const credentials = {
             email: email,
             password: password
         }
+
         const response = await login(credentials)
         setLoading(false)
         if(response.ok){
@@ -75,12 +78,7 @@ const LoginPage = () => {
                             required={true}
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                    >
-                        Login
-                    </button>
+                    <SubmitButton text='Login'/>
                     <div className="text-sm font-medium text-gray-500 ">
                         Not registered?{" "}
                         <Link
