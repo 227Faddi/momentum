@@ -14,7 +14,7 @@ const DisplayGoals = ( { category, timeframe } ) => {
             <p className="text-xl mb-3 font-extrabold tracking-tight text-white">
                 { timeframe }
             </p>
-            <ul className="w-40 sm:w-60 text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white">
+            <ul className="overflow-hidden w-50 sm:w-60 text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white">
                 {Array.isArray(filteredGoals) && filteredGoals.length > 0 ? (
                     filteredGoals.map(goal => (
                         <li key={goal._id} className="w-full border-b rounded-t-lg border-gray-600">
@@ -34,7 +34,7 @@ const DisplayGoals = ( { category, timeframe } ) => {
                         </li>
                     ))
                 ) : (
-                    <li className="text-gray-300">No goals available.</li>
+                    <li className="text-gray-300 p-2">No goals available.</li>
                 )}
             </ul>
         </div>

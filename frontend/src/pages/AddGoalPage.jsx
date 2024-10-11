@@ -2,16 +2,19 @@ import { useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { addGoal } from '../services/api/goals';
 import { SubmitButton } from '../components/Button';
+import Spinner from '../components/Spinner';
 
 const AddGoalPage = () => {
   const navigate = useNavigate();
   const { user, token } = useOutletContext();
 
+  const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('personal');
   const [timeFrame, setTimeFrame] = useState('shorterm');
 
   const handleAdd = async (e) => {
+    setLoading(true)
     e.preventDefault()
     
     const newGoal = {
@@ -23,10 +26,15 @@ const AddGoalPage = () => {
     }
 
     const response = await addGoal(newGoal, token)
+    setLoading(false)
     if(response.ok){
       navigate(`/dashboard/${category}`);
     }
   };
+
+  if(loading){
+    return <Spinner loading={loading} size={1} color='#000' /> 
+  }
 
   return (
     <div className="flex flex-col justify-center items-center flex-grow pb-5 px-12">
@@ -92,7 +100,7 @@ const AddGoalPage = () => {
           </div>
           <SubmitButton text={'Add Goal'}/>
           <div className="text-sm font-medium text-gray-500 ">
-            <a href="/dashboard" className="text-violet-700 hover:underline">
+            <a href="/dashboard/personal" className="text-violet-700 hover:underline">
               Cancel
             </a>
           </div>
