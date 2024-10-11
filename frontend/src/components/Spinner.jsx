@@ -10,6 +10,7 @@ const Spinner = ({ loading }) => {
     <ScaleLoader
       loading={loading}
       cssOverride={override}
+      color='#000'
     />
   );
 };

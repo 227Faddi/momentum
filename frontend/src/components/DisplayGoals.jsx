@@ -1,4 +1,5 @@
-import { useOutletContext, useNavigate, useLocation } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
+import { FaTrashCan } from "react-icons/fa6";
 
 const DisplayGoals = ( { category, timeframe } ) => {
 
@@ -24,11 +25,11 @@ const DisplayGoals = ( { category, timeframe } ) => {
                                     onChange={() => handleCompleteGoal(goal._id)}
                                     className="cursor-pointer text-blue-600 rounded focus:ring-blue-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500"
                                 />
-                                <label className="w-full py-3 ms-2 text-sm font-medium text-gray-300">
+                                <label className="w-full py-3 mx-2 text-sm font-medium text-gray-300">
                                     {goal.title}
                                 </label>
                                 <button onClick={() => handleDeleteGoal(goal._id)}>
-                                    <i className="fa-solid fa-delete-left" />
+                                    <FaTrashCan />
                                 </button>
                             </div>
                         </li>

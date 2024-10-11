@@ -33,7 +33,7 @@ const AddGoalPage = () => {
   };
 
   if(loading){
-    return <Spinner loading={loading} size={1} color='#000' /> 
+    return <Spinner loading={loading} size={1} /> 
   }
 
   return (
