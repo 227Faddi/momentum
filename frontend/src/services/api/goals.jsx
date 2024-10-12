@@ -51,7 +51,6 @@ export const completeGoal = async (id, token) => {
         const data = await response.json()
         if(data.status === 'error') {return toast.error(data.message)}
         toast.success(data.message)
-        localStorage.setItem('user', JSON.stringify(data.user));
         return { ok: true }
     } catch(err){
         return toast.error(`An error occurred. ${err.message}`)

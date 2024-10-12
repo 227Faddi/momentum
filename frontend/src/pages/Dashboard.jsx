@@ -28,7 +28,7 @@ const Dashboard = () => {
     const handleDeleteGoal = async (id) => {
         const response = await deleteGoal(id, token)
         if(response.ok){
-            setGoals(goals.filter(goal => goal._id !== id));
+            setGoals(g => g.filter(goal => goal._id !== id));
         }
     };
 
@@ -36,8 +36,8 @@ const Dashboard = () => {
     const handleCompleteGoal = async (id) => {
         const response = await completeGoal(id, token);
         if(response.ok){
-            setGoals(goals.filter(goal => goal._id !== id));
-            setUser(JSON.parse(localStorage.getItem('user')))
+            setGoals(g => g.filter(goal => goal._id !== id));
+            setUser(u => ({...u, points: u.points + 10}))
         }
     };
       

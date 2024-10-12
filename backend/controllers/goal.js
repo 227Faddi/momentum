@@ -33,13 +33,13 @@ export default {
 
       const updatedGoal = await GoalsDB.findByIdAndUpdate(req.params.id, {
         completed: true,
-      }, { new: true })
+      })
 
       const updateUser = await UserDB.findByIdAndUpdate(req.user.id,{
         points: newPoints
-      }, { new: true })
+      })
     
-      res.status(200).json({ status: 'success', message: 'Goal completed! Good Job', user: updateUser })
+      res.status(200).json({ status: 'success', message: 'Goal completed! Good Job' })
     }),
 
     deleteGoal: asyncHandler(async (req, res) => {
@@ -51,9 +51,7 @@ export default {
         res.status(401).json({ status: 'error', message: 'Unauthorized access. Please log in to continue.'})
         throw new Error('User not found')
       }
-
       const goal = await GoalsDB.findById(req.params.id)
-      
       await goal.deleteOne()
       res.status(200).json({ status: 'success', message: 'Goal deleted successfully'})
   }),      
