@@ -29,6 +29,12 @@ export default {
       }
 
       const goal = await GoalsDB.findById(req.params.id)
+      
+      if (goal.user.toString() !== req.user.id) {
+        res.status(401).json({ status: 'error', message: 'Unauthorized access. User not authorized.'})
+        throw new Error('User not authorized')
+      }
+
       const newPoints = req.user.points + 10;
 
       const updatedGoal = await GoalsDB.findByIdAndUpdate(req.params.id, {
@@ -51,7 +57,14 @@ export default {
         res.status(401).json({ status: 'error', message: 'Unauthorized access. Please log in to continue.'})
         throw new Error('User not found')
       }
+
       const goal = await GoalsDB.findById(req.params.id)
+
+      if (goal.user.toString() !== req.user.id) {
+        res.status(401).json({ status: 'error', message: 'Unauthorized access. User not authorized.'})
+        throw new Error('User not authorized')
+      }
+    
       await goal.deleteOne()
       res.status(200).json({ status: 'success', message: 'Goal deleted successfully'})
   }),      
