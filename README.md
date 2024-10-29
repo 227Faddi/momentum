@@ -22,6 +22,8 @@ Performance: Optimized rendering with React, leading to faster load times and im
 
 Architecture: Separated the frontend and backend, allowing the React client to consume APIs from the backend, which enhances flexibility and maintainability for future updates.
 
+Context Integration: Replaced useOutletContext with useContext for centralized state management, enabling easier data access across components and improving scalability and maintainability.
+
 ## Lessons Learned
 While optimizing Momentum, I strengthened my skills in React and modern authentication methods like JWT. I learned how to build scalable, secure systems using token-based authentication and improved my ability to handle API-based architectures. The switch from a template-based system (EJS) to a component-based system (React) has refined my approach to managing UI states and user interactions.
 

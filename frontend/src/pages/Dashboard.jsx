@@ -1,13 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
-import { useOutletContext } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Spinner from '../components/Spinner';
+import { useState, useEffect, useContext } from 'react';
+import { Link, useLocation, Outlet } from 'react-router-dom';
+import { AppContext } from '../layouts/MainLayout';
 import { getGoals, deleteGoal, completeGoal } from '../services/api/goals';
-
+import Spinner from '../components/Spinner';
 
 const Dashboard = () => {
-    const { user, setUser, token, serverUrl } = useOutletContext()
+    
+    const { setUser, token } = useContext(AppContext)
+
     const location = useLocation();
     const path = location.pathname
     let tabClass =`inline-block w-full p-4 focus:outline-none hover:bg-gray-600`
@@ -22,7 +22,7 @@ const Dashboard = () => {
             setLoading(false);
         };
         fetchGoals();
-    }, []);
+    }, [token, setGoals]);
     
     // DELETE GOAL FETCH
     const handleDeleteGoal = async (id) => {
@@ -82,7 +82,7 @@ const Dashboard = () => {
                 >
                     { loading 
                         ? <Spinner loading={loading} size={450} />
-                        : <Outlet context={{ user, setUser, token, serverUrl, goals, handleDeleteGoal, handleCompleteGoal}}/>
+                        : <Outlet context={{ goals, handleDeleteGoal, handleCompleteGoal}}/>
                     }
                 </div>
             </div>

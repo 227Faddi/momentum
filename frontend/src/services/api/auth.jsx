@@ -1,6 +1,23 @@
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 import { toast } from 'react-toastify';
 
+// CURRENT USER
+export const currentUser = async (token) => {
+  try{
+    const response = await fetch(`${serverUrl}/auth/current-user`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    return data
+  } catch(err){
+    return toast.error(`An error occurred. ${err.message}`)
+  }
+}
+
 // LOGIN
 export const login = async (credentials) => {
   try{
@@ -13,14 +30,10 @@ export const login = async (credentials) => {
       body: JSON.stringify(credentials)
     })
     const data = await response.json()
-
     if(data.status === 'error'){
       return toast.error(data.message)
     }
-
     localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data));
-
     return { ok: true}
   } catch(err){
     return toast.error(`An error occurred. ${err.message}`)
@@ -43,7 +56,6 @@ export const signup = async (credentials) => {
       return toast.error(data.message)
     }
     localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data));
     return { ok: true}
   } catch(err){
     return toast.error(`An error occurred. ${err.message}`)
@@ -51,8 +63,7 @@ export const signup = async (credentials) => {
 }
 
 // LOGOUT
-export const logout = (token) => {
+export const logout = () => {
   toast.success('Logout completed successfully')
-  localStorage.removeItem('user');
   localStorage.removeItem('token');
 };

@@ -1,8 +1,10 @@
-import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
+import { useContext } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { AppContext } from '../layouts/MainLayout';
 
 const EnsureAuth = () => {
-    const { user, setUser, token, setToken, serverUrl } = useOutletContext();
-    return user ? <Outlet context={{ user, setUser, token, setToken, serverUrl }} /> : <Navigate to='/' />
+    const { user } = useContext(AppContext)
+    return user ? <Outlet /> : <Navigate to='/' />
 }
 
 export default EnsureAuth

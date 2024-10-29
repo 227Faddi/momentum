@@ -3,12 +3,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
 import { logout } from '../services/api/auth';
 import logo from '../assets/img/logo.svg';
+import { useContext } from 'react';
+import { AppContext } from '../layouts/MainLayout';
 
-const NavBar = ({ user, token, setUser, setToken }) => {
+const NavBar = () => {
+
+    const { user, token, setUser, setToken } = useContext(AppContext)
     const navigate = useNavigate()
     const location = useLocation();
 
     const handleLogout = async () => {
+        localStorage.removeItem('token');
+
         setUser(null)
         setToken(null)
         logout(token)

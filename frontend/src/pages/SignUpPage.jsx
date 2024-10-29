@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../services/api/auth';
 import { SubmitButton } from '../components/Button';
 import Spinner from '../components/Spinner';
+import { AppContext } from '../layouts/MainLayout';
 
 
 const SignUpPage = () => {
-    const { setUser, setToken } = useOutletContext();
+    
+    const { setUser, setToken } = useContext(AppContext);
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false)

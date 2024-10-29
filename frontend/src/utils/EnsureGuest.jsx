@@ -1,8 +1,10 @@
-import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useContext } from 'react';
+import { AppContext } from '../layouts/MainLayout';
 
 const EnsureGuest = () => {
-    const { user, setUser, token, setToken, serverUrl } = useOutletContext();
-    return user ? <Navigate to='/dashboard/personal' /> : <Outlet context={{ user, setUser, token, setToken, serverUrl }} />
+    const { user } = useContext(AppContext)
+    return user ? <Navigate to='/dashboard/personal' /> : <Outlet />
 }
 
 export default EnsureGuest

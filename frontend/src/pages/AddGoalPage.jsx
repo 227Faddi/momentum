@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { addGoal } from '../services/api/goals';
 import { SubmitButton } from '../components/Button';
 import Spinner from '../components/Spinner';
+import { AppContext } from '../layouts/MainLayout';
 
 const AddGoalPage = () => {
   const navigate = useNavigate();
-  const { user, token } = useOutletContext();
+  const { user, token } = useContext(AppContext);
 
   const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState('');

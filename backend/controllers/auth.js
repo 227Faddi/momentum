@@ -10,16 +10,22 @@ const generateToken = (id) => {
 }
 
 export default {
+
+  currentUser: (req, res) => {
+    res.json({
+      _id: req.user.id,
+      username: req.user.username,
+      email: req.user.email,
+      points: req.user.points
+    })
+  },
+
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
     if (user && (bcrypt.compare(password, user.password))) {
       res.json({
-        _id: user.id,
-        username: user.username,
-        email: user.email,
         token: generateToken(user._id),
-        points: user.points
       })
     } else {
       res.status(400).json({ status: 'error', message: 'Invalid email or password. Please try again' })
@@ -28,6 +34,7 @@ export default {
   }),
   
   signup: asyncHandler(async (req, res) => {
+    
     const { username, email, password } = req.body;
   
     if (!username || !email || !password) {
@@ -56,11 +63,7 @@ export default {
 
     if (user) {
       res.status(201).json({
-        _id: user.id,
-        username: user.username,
-        email: user.email,
         token: generateToken(user._id),
-        points: 0,
       })
     } else {
       res.status(400).json({ status: 'error', message: 'Registration failed. Invalid user data'})
