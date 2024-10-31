@@ -6,12 +6,6 @@ const override = {
 };
 
 const Spinner = ({ loading }) => {
-  return (
-    <ScaleLoader
-      loading={loading}
-      cssOverride={override}
-      color='#000'
-    />
-  );
+  return <ScaleLoader loading={loading} cssOverride={override} color="#000" />;
 };
 export default Spinner;

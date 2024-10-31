@@ -2,42 +2,26 @@ import DisplayGoals from './DisplayGoals';
 
 const TabContent = ({ category }) => {
   return (
-    <div
-      className="p-4 rounded-lg sm:p-8"
-    >
-        <h2 className="mb-5 text-2xl font-extrabold tracking-tight text-white">
-          { category }
-        </h2>
-        <div className="flex flex-col sm:flex-row justify-around items-center sm:items-start gap-5">
-          <DisplayGoals
-            category={ category }
-            timeframe='Shorterm'
-            
-          />
-          <DisplayGoals
-            category={ category }
-            timeframe='Longterm'
-          />
-        </div>
+    <div className="p-4 rounded-lg sm:p-8">
+      <h2 className="mb-5 text-2xl font-extrabold tracking-tight text-white">
+        {category}
+      </h2>
+      <div className="flex flex-col sm:flex-row justify-around items-center sm:items-start gap-5">
+        <DisplayGoals category={category} timeframe="Shorterm" />
+        <DisplayGoals category={category} timeframe="Longterm" />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export const PersonalTab = () => {
-  return (
-    <TabContent category='Personal'/>
-  )
-}
+  return <TabContent category="Personal" />;
+};
 
 export const FinanceTab = () => {
-  return (
-    <TabContent category='Finance'/>
-  )
-}
+  return <TabContent category="Finance" />;
+};
 
 export const CareerTab = () => {
-  return (
-    <TabContent category='Career'/>
-  )
-}
-
+  return <TabContent category="Career" />;
+};

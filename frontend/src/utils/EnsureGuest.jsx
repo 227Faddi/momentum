@@ -3,8 +3,8 @@ import { useContext } from 'react';
 import { AppContext } from '../layouts/MainLayout';
 
 const EnsureGuest = () => {
-    const { user } = useContext(AppContext)
-    return user ? <Navigate to='/dashboard/personal' /> : <Outlet />
-}
+  const { user } = useContext(AppContext);
+  return user ? <Navigate to="/dashboard/personal" /> : <Outlet />;
+};
 
-export default EnsureGuest
+export default EnsureGuest;
