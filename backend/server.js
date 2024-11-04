@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 import connectDB from './config/database.js';
+
 // Routes
 import goalRoutes from './routes/goal.js';
 import authRoutes from './routes/auth.js';
