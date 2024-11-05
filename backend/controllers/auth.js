@@ -11,12 +11,7 @@ const generateToken = (id) => {
 
 export default {
   currentUser: (req, res) => {
-    res.json({
-      _id: req.user.id,
-      username: req.user.username,
-      email: req.user.email,
-      points: req.user.points,
-    });
+    res.status(200).json(req.user)
   },
 
   login: asyncHandler(async (req, res) => {
