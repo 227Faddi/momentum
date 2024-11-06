@@ -24,6 +24,7 @@ const MainLayout = () => {
   // GET USER FETCH
   useEffect(() => {
     if (token) {
+      console.log('use effect  current user' + token)
       const fetchCurrentUser = async () => {
         setUser(await currentUser(token));
       };
