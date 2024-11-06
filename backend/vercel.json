@@ -9,12 +9,16 @@
     "routes": [
       {
         "src": "/api/goals/(.*)",
-        "dest": "/api/goals/$1"
+        "dest": "/server.js"
+      },
+      {
+        "src": "/auth/(.*)",
+        "dest": "/server.js"
       },
       {
         "src": "/(.*)",
-        "dest": "/"
+        "dest": "/server.js"
       }
     ]
-  }
+}
   
