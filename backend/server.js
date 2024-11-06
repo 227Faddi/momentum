@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 import connectDB from './config/database.js';
+import errorHandler from './middleware/errorMiddleware.js';
 
 // Routes
 import goalRoutes from './routes/goal.js';
@@ -24,7 +25,9 @@ app.use(
   })
 );
 
-app.use(express.urlencoded({ extended: true }));
+app.use(errorHandler);
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use('/api/goals', goalRoutes);
