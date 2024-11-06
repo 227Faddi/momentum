@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -24,14 +24,18 @@ const MainLayout = () => {
   // GET USER FETCH
   useEffect(() => {
     if (token) {
-      console.log('use effect  current user' + token)
+      console.log('use effect  current user' + token);
       const fetchCurrentUser = async () => {
-        setUser(await currentUser(token));
+        try {
+          const userData = await currentUser(token);
+          setUser(userData);
+        } catch {
+          toast.error('Error fetching user');
+        }
       };
       fetchCurrentUser();
-      console.log('effetc' + user)
     }
-  }, [token, user]);
+  }, [token]);
 
   return (
     <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
