@@ -12,6 +12,9 @@ export const currentUser = async (token) => {
       },
     });
     const data = await response.json();
+    if (data.status === 'error') {
+      return toast.error(data.message);
+    }
     return data;
   } catch (err) {
     return toast.error(`An error occurred. ${err.message}`);
