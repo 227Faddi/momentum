@@ -10,9 +10,9 @@ const generateToken = (id) => {
 };
 
 export default {
-  currentUser: (req, res) => {
+  currentUser: asyncHandler(async (req, res) => {
     res.status(200).json(req.user)
-  },
+  }),
 
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body;
