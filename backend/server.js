@@ -16,9 +16,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -26,6 +23,9 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use('/api/goals', goalRoutes);
 app.use('/auth', authRoutes);

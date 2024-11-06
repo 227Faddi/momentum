@@ -12,11 +12,13 @@ export const currentUser = async (token) => {
       },
     });
     const data = await response.json();
+    console.log(`${data} the fetch wen right`)
     if (data.status === 'error') {
       return toast.error(data.message);
     }
     return data;
   } catch (err) {
+    console.log(err);
     return toast.error(`An error occurred. ${err.message}`);
   }
 };
