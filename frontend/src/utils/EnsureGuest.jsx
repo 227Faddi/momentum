@@ -4,6 +4,7 @@ import { AppContext } from '../layouts/MainLayout';
 
 const EnsureGuest = () => {
   const { user } = useContext(AppContext);
+  console.log(user)
   return user ? <Navigate to="/dashboard/personal" /> : <Outlet />;
 };
 

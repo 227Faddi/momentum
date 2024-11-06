@@ -29,6 +29,7 @@ const MainLayout = () => {
         setUser(await currentUser(token));
       };
       fetchCurrentUser();
+      console.log('effetc' + user)
     }
   }, [token]);
 
