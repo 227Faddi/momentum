@@ -11,8 +11,6 @@ export const currentUser = async (token) => {
         'Content-Type': 'application/json',
       },
     });
-    const errorText = await response.text();
-    console.log(errorText)
     const data = await response.json();
     console.log(`${data} the fetch wen right`)
     if (data.status === 'error') {
