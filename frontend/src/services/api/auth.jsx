@@ -11,6 +11,8 @@ export const currentUser = async (token) => {
         'Content-Type': 'application/json',
       },
     });
+    const errorText = await response.text();
+    console.log(errorText)
     const data = await response.json();
     console.log(`${data} the fetch wen right`)
     if (data.status === 'error') {
@@ -18,7 +20,7 @@ export const currentUser = async (token) => {
     }
     return data;
   } catch (err) {
-    console.log(err);
+    console.log(`${err} fetch failed nots`);
     return toast.error(`An error occurred. ${err.message}`);
   }
 };
