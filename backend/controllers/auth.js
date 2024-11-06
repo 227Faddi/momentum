@@ -11,7 +11,15 @@ const generateToken = (id) => {
 
 export default {
   currentUser: asyncHandler(async (req, res) => {
-    res.status(200).json(req.user)
+    if(req.user){
+      return res.status(200).json(req.user)
+    }
+    res
+    .status(400)
+    .json({
+      status: 'error',
+      message: 'Failed to fetch the user',
+    });
   }),
 
   login: asyncHandler(async (req, res) => {

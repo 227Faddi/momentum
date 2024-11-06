@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 // CURRENT USER
 export const currentUser = async (token) => {
   try {
-    console.log('getting current user')
     const response = await fetch(`${serverUrl}/auth/current-user`, {
       method: 'GET',
       headers: {
