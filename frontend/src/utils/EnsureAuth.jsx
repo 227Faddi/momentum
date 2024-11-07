@@ -4,7 +4,6 @@ import { AppContext } from '../layouts/MainLayout';
 
 const EnsureAuth = () => {
   const { user } = useContext(AppContext);
-  console.log(user)
   return user ? <Outlet /> : <Navigate to="/" />;
 };
 

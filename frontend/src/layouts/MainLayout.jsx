@@ -24,7 +24,6 @@ const MainLayout = () => {
   // GET USER FETCH
   useEffect(() => {
     if (token) {
-      console.log('use effect  current user' + token);
       const fetchCurrentUser = async () => {
         try {
           const userData = await currentUser(token);
@@ -44,9 +43,9 @@ const MainLayout = () => {
           <AppContext.Provider value={context}>
             <NavBar />
             <Outlet />
-            <Footer />
-            <ToastContainer autoClose={1000} draggable={true} />
           </AppContext.Provider>
+          <Footer />
+          <ToastContainer autoClose={1000} draggable={true} />
         </div>
       </div>
     </div>

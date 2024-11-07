@@ -13,13 +13,14 @@ export default {
   currentUser: asyncHandler(async (req, res) => {
     if(req.user){
       return res.status(200).json(req.user)
+    } else{
+      res
+      .status(400)
+      .json({
+        status: 'error',
+        message: 'User not present',
+      });
     }
-    res
-    .status(400)
-    .json({
-      status: 'error',
-      message: 'Failed to fetch the user',
-    });
   }),
 
   login: asyncHandler(async (req, res) => {
