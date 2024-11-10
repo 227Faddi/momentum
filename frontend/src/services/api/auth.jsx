@@ -67,6 +67,6 @@ export const signup = async (credentials) => {
 
 // LOGOUT
 export const logout = () => {
-  toast.success('Logout completed successfully');
+  toast.info('Logout completed successfully');
   localStorage.removeItem('token');
 };
