@@ -4,10 +4,10 @@ import { FaFire } from 'react-icons/fa';
 import { logout } from '../services/api/auth';
 import logo from '../assets/img/logo.svg';
 import { useContext } from 'react';
-import { AppContext } from '../layouts/MainLayout';
+import DataContext from '../contexts/DataContext'
 
 const NavBar = () => {
-  const { user, token, setUser, setToken } = useContext(AppContext);
+  const { user, token, setUser, setToken } = useContext(DataContext);
   const navigate = useNavigate();
   const location = useLocation();
 

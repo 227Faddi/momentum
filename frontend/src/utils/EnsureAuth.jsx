@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { AppContext } from '../layouts/MainLayout';
+import DataContext from '../contexts/DataContext'
 
 const EnsureAuth = () => {
-  const { user } = useContext(AppContext);
+  const { user } = useContext(DataContext);
   return user ? <Outlet /> : <Navigate to="/" />;
 };
 

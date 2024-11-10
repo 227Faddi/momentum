@@ -24,19 +24,19 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<MainLayout />}>
-        <Route element={<EnsureGuest />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-        </Route>
-        <Route element={<EnsureAuth />}>
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="/dashboard/personal" element={<PersonalTab />} />
-            <Route path="/dashboard/finance" element={<FinanceTab />} />
-            <Route path="/dashboard/career" element={<CareerTab />} />
+          <Route element={<EnsureGuest />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
           </Route>
-          <Route path="/add-goal" element={<AddGoalPage />} />
-        </Route>
+          <Route element={<EnsureAuth />}>
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route path="/dashboard/personal" element={<PersonalTab />} />
+              <Route path="/dashboard/finance" element={<FinanceTab />} />
+              <Route path="/dashboard/career" element={<CareerTab />} />
+            </Route>
+            <Route path="/add-goal" element={<AddGoalPage />} />
+          </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     )

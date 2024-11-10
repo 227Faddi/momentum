@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useContext } from 'react';
-import { AppContext } from '../layouts/MainLayout';
+import DataContext from '../contexts/DataContext'
 
 const EnsureGuest = () => {
-  const { user } = useContext(AppContext);
+  const { user } = useContext(DataContext);
   return user ? <Navigate to="/dashboard/personal" /> : <Outlet />;
 };
 

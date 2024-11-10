@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../services/api/auth';
 import { SubmitButton } from '../components/Button';
 import Spinner from '../components/Spinner';
-import { AppContext } from '../layouts/MainLayout';
+import DataContext from '../contexts/DataContext'
+
 
 const SignUpPage = () => {
-  const { setUser, setToken } = useContext(AppContext);
+  const { setUser, setToken } = useContext(DataContext);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -18,11 +19,11 @@ const SignUpPage = () => {
   const postSignup = async (e) => {
     setLoading(true);
     e.preventDefault();
-
     const credentials = {
       username: username,
       email: email,
       password: password,
+      confirmPassword: confirmPassword,
     };
 
     const response = await signup(credentials);

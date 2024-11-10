@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/api/auth';
 import Spinner from '../components/Spinner';
 import { SubmitButton } from '../components/Button';
-import { AppContext } from '../layouts/MainLayout';
+import DataContext from '../contexts/DataContext'
 
 const LoginPage = () => {
-  const { setUser, setToken } = useContext(AppContext);
+  const { setUser, setToken } = useContext(DataContext);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);

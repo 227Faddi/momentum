@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { AppContext } from '../layouts/MainLayout';
 import { getGoals, deleteGoal, completeGoal } from '../services/api/goals';
+import DataContext from '../contexts/DataContext'
 import Spinner from '../components/Spinner';
 
 const Dashboard = () => {
-  const { setUser, token } = useContext(AppContext);
+  const { setUser, token } = useContext(DataContext);
 
   const location = useLocation();
   const path = location.pathname;

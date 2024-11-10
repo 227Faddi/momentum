@@ -32,7 +32,6 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       ...eslintConfigPrettier.rules, // Disables rules that conflict with Prettier
-      'prettier/prettier': 'error', // Shows Prettier formatting issues as ESLint errors
       'react/prop-types': 'off',
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [

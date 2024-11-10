@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { addGoal } from '../services/api/goals';
 import { SubmitButton } from '../components/Button';
 import Spinner from '../components/Spinner';
-import { AppContext } from '../layouts/MainLayout';
+import DataContext from '../contexts/DataContext'
+
 
 const AddGoalPage = () => {
   const navigate = useNavigate();
-  const { user, token } = useContext(AppContext);
+  const { user, token } = useContext(DataContext);
 
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
