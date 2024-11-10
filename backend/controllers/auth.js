@@ -42,9 +42,9 @@ export default {
   }),
 
   signup: asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, confirmPassword} = req.body;
 
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !confirmPassword) {
       res
         .status(400)
         .json({
@@ -53,6 +53,17 @@ export default {
             'Registration failed. Please ensure all fields are filled correctly',
         });
       throw new Error('Please add all fields');
+    }
+
+    if(password != confirmPassword){
+      res
+      .status(400)
+      .json({
+        status: 'error',
+        message:
+          'Passwords do not match',
+      });
+      throw new Error('Passwords do not match');
     }
 
     // Check if user exists
