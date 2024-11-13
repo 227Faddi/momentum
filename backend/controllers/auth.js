@@ -5,18 +5,16 @@ import asyncHandler from 'express-async-handler';
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '7d',
+    expiresIn: '20s',
   });
 };
 
 export default {
   currentUser: asyncHandler(async (req, res) => {
-    if(req.user){
-      return res.status(200).json(req.user)
-    } else{
-      res
-      .status(400)
-      .json({
+    if (req.user) {
+      return res.status(200).json(req.user);
+    } else {
+      res.status(400).json({
         status: 'error',
         message: 'User not present',
       });
@@ -31,37 +29,30 @@ export default {
         token: generateToken(user._id),
       });
     } else {
-      res
-        .status(400)
-        .json({
-          status: 'error',
-          message: 'Invalid email or password. Please try again',
-        });
+      res.status(400).json({
+        status: 'error',
+        message: 'Invalid email or password. Please try again',
+      });
       throw new Error('Invalid credentials');
     }
   }),
 
   signup: asyncHandler(async (req, res) => {
-    const { username, email, password, confirmPassword} = req.body;
+    const { username, email, password, confirmPassword } = req.body;
 
     if (!username || !email || !password || !confirmPassword) {
-      res
-        .status(400)
-        .json({
-          status: 'error',
-          message:
-            'Registration failed. Please ensure all fields are filled correctly',
-        });
+      res.status(400).json({
+        status: 'error',
+        message:
+          'Registration failed. Please ensure all fields are filled correctly',
+      });
       throw new Error('Please add all fields');
     }
 
-    if(password != confirmPassword){
-      res
-      .status(400)
-      .json({
+    if (password != confirmPassword) {
+      res.status(400).json({
         status: 'error',
-        message:
-          'Passwords do not match',
+        message: 'Passwords do not match',
       });
       throw new Error('Passwords do not match');
     }
@@ -70,12 +61,10 @@ export default {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      res
-        .status(400)
-        .json({
-          status: 'error',
-          message: 'User email already exists. Please log in instead',
-        });
+      res.status(400).json({
+        status: 'error',
+        message: 'User email already exists. Please log in instead',
+      });
       throw new Error('User already exists');
     }
 
@@ -95,12 +84,10 @@ export default {
         token: generateToken(user._id),
       });
     } else {
-      res
-        .status(400)
-        .json({
-          status: 'error',
-          message: 'Registration failed. Invalid user data',
-        });
+      res.status(400).json({
+        status: 'error',
+        message: 'Registration failed. Invalid user data',
+      });
       throw new Error('Invalid user data');
     }
   }),

@@ -6,7 +6,7 @@ import { SubmitButton } from '../components/ui/Button';
 import DataContext from '../contexts/DataContext';
 
 const LoginPage = () => {
-  const { setUser, setToken } = useContext(DataContext);
+  const { setToken } = useContext(DataContext);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,6 @@ const LoginPage = () => {
     const response = await login(credentials);
     setLoading(false);
     if (response.ok) {
-      setUser(JSON.parse(localStorage.getItem('user')));
       setToken(localStorage.getItem('token'));
       navigate('/dashboard/personal');
     }
