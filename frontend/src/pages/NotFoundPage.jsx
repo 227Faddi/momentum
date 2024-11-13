@@ -1,4 +1,4 @@
-import { LinkButton } from '../components/Button';
+import { LinkButton } from '../components/ui/Button';
 
 const NotFoundPage = () => {
   return (

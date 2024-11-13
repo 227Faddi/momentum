@@ -1,10 +1,9 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addGoal } from '../services/api/goals';
-import { SubmitButton } from '../components/Button';
-import Spinner from '../components/Spinner';
-import DataContext from '../contexts/DataContext'
-
+import { SubmitButton } from '../components/ui/Button';
+import Spinner from '../components/ui/Spinner';
+import DataContext from '../contexts/DataContext';
 
 const AddGoalPage = () => {
   const navigate = useNavigate();

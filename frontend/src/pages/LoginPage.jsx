@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/api/auth';
-import Spinner from '../components/Spinner';
-import { SubmitButton } from '../components/Button';
-import DataContext from '../contexts/DataContext'
+import Spinner from '../components/ui/Spinner';
+import { SubmitButton } from '../components/ui/Button';
+import DataContext from '../contexts/DataContext';
 
 const LoginPage = () => {
   const { setUser, setToken } = useContext(DataContext);

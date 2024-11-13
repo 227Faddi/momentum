@@ -1,10 +1,9 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../services/api/auth';
-import { SubmitButton } from '../components/Button';
-import Spinner from '../components/Spinner';
-import DataContext from '../contexts/DataContext'
-
+import { SubmitButton } from '../components/ui/Button';
+import Spinner from '../components/ui/Spinner';
+import DataContext from '../contexts/DataContext';
 
 const SignUpPage = () => {
   const { setUser, setToken } = useContext(DataContext);

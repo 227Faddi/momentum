@@ -2,7 +2,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
 import { FaUserAlt } from 'react-icons/fa';
-import { SocialLink } from './Button';
+import { SocialLink } from './ui/Button';
 
 const Footer = () => {
   return (

@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { getGoals, deleteGoal, completeGoal } from '../services/api/goals';
-import DataContext from '../contexts/DataContext'
-import Spinner from '../components/Spinner';
+import DataContext from '../contexts/DataContext';
+import Spinner from '../components/ui/Spinner';
 
 const Dashboard = () => {
   const { setUser, token } = useContext(DataContext);
