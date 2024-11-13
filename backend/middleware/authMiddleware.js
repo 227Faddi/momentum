@@ -20,9 +20,7 @@ const protect = asyncHandler(async (req, res, next) => {
       return next();
     } catch (error) {
       if (error.name === 'TokenExpiredError') {
-        res
-          .status(401)
-          .json({ status: 'error', message: 'Token expired, Refresh Please' });
+        res.status(401).json({ status: 'error', message: 'Token expired' });
         return;
       }
       res.status(401);

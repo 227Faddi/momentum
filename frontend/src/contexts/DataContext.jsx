@@ -14,7 +14,6 @@ export const ContextProvider = ({ children }) => {
     setToken,
   };
 
-  // GET USER FETCH
   useEffect(() => {
     if (token) {
       const fetchCurrentUser = async () => {
