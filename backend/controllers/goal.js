@@ -26,33 +26,27 @@ export default {
 
   completeGoal: asyncHandler(async (req, res) => {
     if (!req.params.id) {
-      res
-        .status(400)
-        .json({
-          status: 'error',
-          message: 'Something went wrong. Goal not found',
-        });
+      res.status(400).json({
+        status: 'error',
+        message: 'Something went wrong. Goal not found',
+      });
       throw new Error('Goal not found');
     }
     if (!req.user) {
-      res
-        .status(401)
-        .json({
-          status: 'error',
-          message: 'Unauthorized access. Please log in to continue.',
-        });
+      res.status(401).json({
+        status: 'error',
+        message: 'Unauthorized access. Please log in to continue.',
+      });
       throw new Error('User not found');
     }
 
     const goal = await GoalsDB.findById(req.params.id);
 
     if (goal.user.toString() !== req.user.id) {
-      res
-        .status(401)
-        .json({
-          status: 'error',
-          message: 'Unauthorized access. User not authorized.',
-        });
+      res.status(401).json({
+        status: 'error',
+        message: 'Unauthorized access. User not authorized.',
+      });
       throw new Error('User not authorized');
     }
 
@@ -68,33 +62,27 @@ export default {
 
   deleteGoal: asyncHandler(async (req, res) => {
     if (!req.params.id) {
-      res
-        .status(400)
-        .json({
-          status: 'error',
-          message: 'Something went wrong. Goal not found',
-        });
+      res.status(400).json({
+        status: 'error',
+        message: 'Something went wrong. Goal not found',
+      });
       throw new Error('Goal not found');
     }
     if (!req.user) {
-      res
-        .status(401)
-        .json({
-          status: 'error',
-          message: 'Unauthorized access. Please log in to continue.',
-        });
+      res.status(401).json({
+        status: 'error',
+        message: 'Unauthorized access. Please log in to continue.',
+      });
       throw new Error('User not found');
     }
 
     const goal = await GoalsDB.findById(req.params.id);
 
     if (goal.user.toString() !== req.user.id) {
-      res
-        .status(401)
-        .json({
-          status: 'error',
-          message: 'Unauthorized access. User not authorized.',
-        });
+      res.status(401).json({
+        status: 'error',
+        message: 'Unauthorized access. User not authorized.',
+      });
       throw new Error('User not authorized');
     }
 

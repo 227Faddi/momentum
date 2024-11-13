@@ -73,4 +73,5 @@ export const signup = async (credentials) => {
 export const logout = () => {
   toast.info('Logout completed successfully');
   localStorage.removeItem('token');
+  location.reload();
 };

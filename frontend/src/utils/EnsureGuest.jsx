@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useContext } from 'react';
-import DataContext from '../contexts/DataContext'
+import DataContext from '../contexts/DataContext';
 
 const EnsureGuest = () => {
   const { user } = useContext(DataContext);
