@@ -12,6 +12,10 @@ export const getGoals = async (token) => {
       },
     });
     const data = await response.json();
+    if (data.status === 'error' && data.message === 'Token expired') {
+      localStorage.removeItem('token');
+      location.href('/');
+    }
     if (data.status === 'error') {
       return toast.error(data.message);
     }
