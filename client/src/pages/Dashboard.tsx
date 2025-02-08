@@ -4,34 +4,7 @@ import { useGoalsQuery } from "../services/api/goals";
 
 const Dashboard = () => {
   const { pathname } = useLocation();
-  const { data: goals, isLoading } = useGoalsQuery();
-
-  // GET GOAL FETCH
-
-  // useEffect(() => {
-  //   const fetchGoals = async () => {
-  //     setGoals(await getGoals(token));
-  //     setLoading(false);
-  //   };
-  //   fetchGoals();
-  // }, [token, setGoals]);
-
-  // // DELETE GOAL FETCH
-  // const handleDeleteGoal = async (id) => {
-  //   const response = await deleteGoal(id, token);
-  //   if (response.ok) {
-  //     setGoals((g) => g.filter((goal) => goal._id !== id));
-  //   }
-  // };
-
-  // // COMPLETE GOAL FETCH
-  // const handleCompleteGoal = async (id) => {
-  //   const response = await completeGoal(id, token);
-  //   if (response.ok) {
-  //     setGoals((g) => g.filter((goal) => goal._id !== id));
-  //     setUser((u) => ({ ...u, points: u.points + 10 }));
-  //   }
-  // };
+  const { isLoading } = useGoalsQuery();
 
   return (
     <div className="overflow-hidden text-center my-5 flex flex-col items-center flex-grow pb-10 px-12">
@@ -83,7 +56,7 @@ const Dashboard = () => {
           id="fullWidthTabContent"
           className="border-t border-gray-600 min-h-96"
         >
-          {isLoading ? <Spinner /> : <Outlet context={{ goals }} />}
+          {isLoading ? <Spinner /> : <Outlet />}
         </div>
       </div>
     </div>
