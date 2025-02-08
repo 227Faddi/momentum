@@ -1,5 +1,10 @@
 import { FaTrashCan } from "react-icons/fa6";
-import { useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+  useCompleteGoalMutation,
+  useDeleteGoalMutation,
+  useGoalsQuery,
+} from "../services/api/goals";
 
 type Props = {
   category: string;
@@ -7,16 +12,33 @@ type Props = {
 };
 
 const DisplayGoals = ({ category, timeframe }: Props) => {
-  const { goals, handleDeleteGoal, handleCompleteGoal } = useOutletContext();
+  const [deleteGoal] = useDeleteGoalMutation();
+  const [completeGoal] = useCompleteGoalMutation();
+  const { data: goals } = useGoalsQuery();
 
-  let filteredGoals = [];
-  if (Array.isArray(goals)) {
-    filteredGoals = goals.filter(
-      (goal) =>
-        goal.category === category.toLowerCase() &&
-        goal.timeFrame === timeframe.toLowerCase()
-    );
-  }
+  const filteredGoals = goals?.filter(
+    (goal) =>
+      goal.category === category.toLowerCase() &&
+      goal.timeFrame === timeframe.toLowerCase()
+  );
+
+  const handleCompleteGoal = async (id: string) => {
+    try {
+      await completeGoal(id);
+      toast.success("Goal completed, congrats!");
+    } catch {
+      toast.error("Something went wrong, please try again.");
+    }
+  };
+
+  const handleDeleteGoal = async (id: string) => {
+    try {
+      await deleteGoal(id);
+      toast.info("Goal deleted successfully.");
+    } catch {
+      toast.error("Something went wrong, please try again.");
+    }
+  };
 
   return (
     <div className="mt-8 sm:mt-0">
@@ -24,7 +46,7 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
         {timeframe}
       </p>
       <ul className="overflow-hidden w-50 sm:w-60 text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white">
-        {Array.isArray(filteredGoals) && filteredGoals.length > 0 ? (
+        {filteredGoals && filteredGoals.length > 0 ? (
           filteredGoals.map((goal) => (
             <li
               key={goal._id}

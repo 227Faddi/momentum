@@ -19,6 +19,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     me: builder.query<User, void>({
       query: () => `/auth/me`,
+      providesTags: ["User"],
     }),
   }),
 });

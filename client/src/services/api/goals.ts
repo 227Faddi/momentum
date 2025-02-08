@@ -3,8 +3,9 @@ import { apiSlice } from "./index";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    goals: builder.query<Goal, void>({
+    goals: builder.query<Goal[], void>({
       query: () => `/api/goals`,
+      providesTags: ["Goals"],
     }),
     addGoal: builder.mutation({
       query: (data) => ({
@@ -12,20 +13,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Goals"],
     }),
     completeGoal: builder.mutation({
-      query: (data) => ({
-        url: `/api/goals/${data.id}/complete`,
+      query: (id) => ({
+        url: `/api/goals/${id}/complete`,
         method: "PUT",
-        body: data,
       }),
+      invalidatesTags: ["Goals", "User"],
     }),
     deleteGoal: builder.mutation({
-      query: (data) => ({
-        url: `/api/goals/${data.id}`,
+      query: (id) => ({
+        url: `/api/goals/${id}`,
         method: "DELETE",
-        body: data,
       }),
+      invalidatesTags: ["Goals"],
     }),
   }),
 });
