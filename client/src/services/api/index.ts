@@ -3,15 +3,18 @@ import {
   createApi,
   FetchArgs,
   fetchBaseQuery,
+  FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import { logout } from "../../state/authSlice";
+import { RootState } from "../../state/store";
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: serverUrl,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
+    const state = getState() as RootState;
+    const token = state.auth.token;
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -22,15 +25,14 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (
   args: string | FetchArgs,
   api: BaseQueryApi,
-  extraOptions: {}
+  extraOptions: object
 ) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result?.error?.originalStatus === 403) {
+  if ((result?.error as FetchBaseQueryError)?.status === 403) {
     console.log("sending refresh token");
     // send refresh token to get new access token
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
-    console.log(refreshResult);
     if (refreshResult?.data) {
       // store the new token
       console.log(refreshResult.data);

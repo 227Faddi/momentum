@@ -61,7 +61,10 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
                 <label className="w-full py-3 mx-2 text-sm font-medium text-gray-300">
                   {goal.title}
                 </label>
-                <button onClick={() => handleDeleteGoal(goal._id)}>
+                <button
+                  onClick={() => handleDeleteGoal(goal._id)}
+                  className="cursor-pointer"
+                >
                   <FaTrashCan />
                 </button>
               </div>

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useLocalStorage from "../hooks/useLocalStorage";
 import { useLoginMutation } from "../services/api/auth";
 import { setToken } from "../state/authSlice";
 
@@ -8,6 +9,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
+  const setRefreshToken = useLocalStorage("refresh");
 
   const guest = {
     email: import.meta.env.VITE_GUEST_EMAIL,
@@ -17,7 +19,8 @@ const HomePage = () => {
   const handleLogin = async () => {
     try {
       const result = await login(guest);
-      dispatch(setToken(result.data.token));
+      dispatch(setToken(result.data.accessToken));
+      setRefreshToken.setItem(result.data.refreshToken);
       navigate("/dashboard/personal");
     } catch (err) {
       console.error(err);
