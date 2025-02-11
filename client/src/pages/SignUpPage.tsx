@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { useLoginMutation } from "../services/api/auth";
+import { useSignupMutation } from "../services/api/auth";
 import { setToken } from "../state/authSlice";
 
 const schema = z
@@ -38,7 +38,7 @@ type FormType = z.infer<typeof schema>;
 
 const SignUpPage = () => {
   const navigate = useNavigate();
-  const [login] = useLoginMutation();
+  const [signup, { error }] = useSignupMutation();
   const dispatch = useDispatch();
 
   const {
@@ -49,12 +49,12 @@ const SignUpPage = () => {
 
   const onSubmit: SubmitHandler<FormType> = async (data) => {
     try {
-      const result = await login(data);
+      const result = await signup(data);
       dispatch(setToken(result.data.token));
       navigate("/dashboard/personal");
     } catch (err) {
       console.error(err);
-      toast.error("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again." + err);
     }
   };
 
@@ -67,7 +67,7 @@ const SignUpPage = () => {
           </h1>
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-900s">
-              Email
+              Username
             </label>
             <input
               {...register("username")}

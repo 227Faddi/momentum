@@ -9,16 +9,17 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    required: false,
+    required: true,
     sparse: true,
   },
   password: {
     type: String,
-    required: false,
+    required: true,
   },
   points: {
     type: Number,
     default: 0,
+    required: true,
   },
 });
 
