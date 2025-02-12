@@ -38,7 +38,7 @@ type FormType = z.infer<typeof schema>;
 
 const SignUpPage = () => {
   const navigate = useNavigate();
-  const [signup, { error }] = useSignupMutation();
+  const [signup] = useSignupMutation();
   const dispatch = useDispatch();
 
   const {
