@@ -54,11 +54,11 @@ jobs:
         node-version: 20
 
     - name: Install dependencies
-      working-directory: ./server
+      working-directory: ./client
       run: npm ci
 
     - name: Build project
-      working-directory: ./server
+      working-directory: ./client
       run: npm run build
 
     - name: Deploy to Netlify
