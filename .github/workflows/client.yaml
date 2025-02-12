@@ -53,10 +53,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Netlify CLI
-        run: |
-          npm install -g netlify-cli@17.10.1
-          echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+      - name: Install Netlify
+        run: npm install netlify-cli@17.10.1 -g
 
       - name: Install dependencies
         working-directory: ./client
@@ -72,5 +70,5 @@ jobs:
           netlify deploy \
             --prod \
             --dir dist \
-            --site $NETLIFY_SITE_ID \
-            --auth $NETLIFY_TOKEN
+            --site ${{ secrets.NETLIFY_SITE_ID }} \
+            --auth ${{ secrets.NETLIFY_TOKEN }}

@@ -35,7 +35,7 @@ const HomePage = () => {
           Set Your Goals, Achieve Success
         </h1>
         <p>
-          and Earn Points for Every Milestone You Reach. Start Planning Today!
+          and Earn Points for Every Milestone You Reach. Start Planning Today
         </p>
       </div>
       <button
