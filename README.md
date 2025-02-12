@@ -59,12 +59,6 @@ VITE_GUEST_PASSWORD=your_guest_password
 
 - Server
 
-Gemini: https://ai.google.dev/gemini-api/docs/api-key  
-Google: https://console.cloud.google.com  
-Github: https://github.com/settings/developers  
-Cloudinary: https://cloudinary.com  
-DiceBear: https://www.dicebear.com
-
 Create a .env file in the root directory and fill in the following values:
 
 ```
