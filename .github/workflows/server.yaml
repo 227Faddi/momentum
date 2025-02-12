@@ -40,7 +40,7 @@ jobs:
         working-directory: ./server
         run: npm run build
 
-  deploy:
+  CD:
     needs: CI
     runs-on: ubuntu-latest
 
