@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { useSignupMutation } from "../services/api/auth";
+import { useSignupMutation } from "../api/auth";
 import { setToken } from "../state/authSlice";
 
 const schema = z

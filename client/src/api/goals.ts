@@ -1,4 +1,4 @@
-import type { Goal } from "../../types";
+import type { Goal } from "../types";
 import { apiSlice } from "./index";
 
 export const usersApiSlice = apiSlice.injectEndpoints({

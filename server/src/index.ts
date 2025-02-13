@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import express from 'express';
 import morgan from 'morgan';
 import connectDB from './config/database.js';
-// import errorHandler from './middleware/errorHandler.js';
 
 // Routes
 import authRoutes from './routes/auth.js';

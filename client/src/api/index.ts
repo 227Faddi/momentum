@@ -5,9 +5,12 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
-import { logout } from "../../state/authSlice";
-import { RootState } from "../../state/store";
+import { logout } from "../state/authSlice";
+import { RootState } from "../state/store";
+
 const serverUrl = import.meta.env.VITE_SERVER_URL;
+
+console.log(serverUrl);
 
 const baseQuery = fetchBaseQuery({
   baseUrl: serverUrl,

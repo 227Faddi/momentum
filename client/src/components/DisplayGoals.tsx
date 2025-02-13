@@ -4,7 +4,7 @@ import {
   useCompleteGoalMutation,
   useDeleteGoalMutation,
   useGoalsQuery,
-} from "../services/api/goals";
+} from "../api/goals";
 
 type Props = {
   category: string;

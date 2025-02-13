@@ -2,7 +2,7 @@ import { FaFire } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLoginMutation, useMeQuery } from "../services/api/auth";
+import { useLoginMutation, useMeQuery } from "../api/auth";
 import { logout, setToken } from "../state/authSlice";
 
 const NavBar = () => {
@@ -50,20 +50,7 @@ const NavBar = () => {
         </h2>
         <div className="flex justify-center gap-10 px-2 sm:pt-0 pt-8">
           {pathname === "/" ? (
-            <div className="flex gap-2">
-              <Link
-                to="/login"
-                className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 shadow-lg shadow-pink-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              >
-                Signup
-              </Link>
-            </div>
+            <div className="flex gap-2"></div>
           ) : pathname === "/signup" || pathname === "/login" ? (
             <button
               className="cursor-pointer text-white bg-gradient-to-r from-purple-400 via-purple-600 to-purple-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"

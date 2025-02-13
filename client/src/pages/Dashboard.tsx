@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { useGoalsQuery } from "../api/goals";
 import Spinner from "../components/ui/Spinner";
-import { useGoalsQuery } from "../services/api/goals";
 
 const Dashboard = () => {
   const { pathname } = useLocation();
