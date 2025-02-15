@@ -7,7 +7,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: () => `/api/goals`,
       providesTags: ["Goals"],
     }),
-    addGoal: builder.mutation({
+    addGoal: builder.mutation<unknown, Goal>({
       query: (data) => ({
         url: `/api/goals`,
         method: "POST",
@@ -15,14 +15,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Goals"],
     }),
-    completeGoal: builder.mutation({
+    completeGoal: builder.mutation<unknown, string>({
       query: (id) => ({
         url: `/api/goals/${id}/complete`,
         method: "PUT",
       }),
       invalidatesTags: ["Goals", "User"],
     }),
-    deleteGoal: builder.mutation({
+    deleteGoal: builder.mutation<unknown, string>({
       query: (id) => ({
         url: `/api/goals/${id}`,
         method: "DELETE",

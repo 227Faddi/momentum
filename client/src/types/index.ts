@@ -5,10 +5,10 @@ export type User = {
 };
 
 export type Goal = {
-  _id: string;
+  _id?: string;
   title: string;
   category: "finance" | "career" | "personal";
   timeFrame: "shorterm" | "longterm";
-  completed: boolean;
-  user: string;
+  completed?: boolean;
+  user?: string;
 };

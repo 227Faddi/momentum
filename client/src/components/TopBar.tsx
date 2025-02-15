@@ -3,18 +3,21 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLoginMutation, useMeQuery } from "../api/auth";
-import { logout, setToken } from "../state/authSlice";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { logout, setTokens } from "../state/authSlice";
 
-const NavBar = () => {
+const TopBar = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
+  const refreshToken = useLocalStorage("refresh");
   const { data: user } = useMeQuery(undefined, {
     skip: !pathname.startsWith("/dashboard"),
   });
 
   const handleLogout = () => {
+    refreshToken.removeItem();
     dispatch(logout());
     navigate("/");
   };
@@ -27,7 +30,12 @@ const NavBar = () => {
   const handleLogin = async () => {
     try {
       const result = await login(guest);
-      dispatch(setToken(result.data.token));
+      dispatch(
+        setTokens({
+          accessToken: result.data?.accessToken,
+          refreshToken: result.data?.refreshToken,
+        })
+      );
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
@@ -39,7 +47,7 @@ const NavBar = () => {
     <nav className="py-6 sm:py-8 text-center">
       <div className="sm:flex justify-around items-center">
         <h2 className="mb-0 text-3xl cursor-pointer">
-          <Link to="/" className="cursor-pointer">
+          <Link to="/">
             <img
               src="/img/logo.svg"
               alt="logo"
@@ -66,6 +74,7 @@ const NavBar = () => {
                 {user && user.points}
               </div>
               <Link to="/add-goal">Add</Link>
+              <Link to="/leaderboard">Leaderboard</Link>
               <button onClick={handleLogout} className="cursor-pointer">
                 Logout
               </button>
@@ -77,4 +86,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default TopBar;

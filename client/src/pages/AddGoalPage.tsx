@@ -30,7 +30,10 @@ const AddGoalPage = () => {
 
   const onSubmit: SubmitHandler<FormType> = async (data) => {
     try {
-      await addGoal(data);
+      const result = await addGoal(data);
+      if (result.error) {
+        return toast.error("An error occurred. Please try again.");
+      }
       toast.success("Goal added successfully");
       navigate(`/dashboard/${data.category}`);
     } catch (err) {

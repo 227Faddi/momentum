@@ -1,52 +1,62 @@
 import {
-  BaseQueryApi,
+  BaseQueryFn,
   createApi,
   FetchArgs,
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
-import { logout } from "../state/authSlice";
+import { logout, setTokens } from "../state/authSlice";
 import { RootState } from "../state/store";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 
-console.log(serverUrl);
+interface ExtraOptions {
+  isRefresh: boolean;
+}
 
 const baseQuery = fetchBaseQuery({
   baseUrl: serverUrl,
   credentials: "include",
-  prepareHeaders: (headers, { getState }) => {
+  prepareHeaders: (headers, { getState, extraOptions }) => {
     const state = getState() as RootState;
-    const token = state.auth.token;
-    if (token) {
+    const token = state.auth.accessToken;
+    const refreshToken = state.auth.refreshToken;
+    if ((extraOptions as ExtraOptions)?.isRefresh) {
+      headers.set("authorization", `Bearer ${refreshToken}`);
+    } else if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
     return headers;
   },
 });
 
-const baseQueryWithReauth = async (
-  args: string | FetchArgs,
-  api: BaseQueryApi,
-  extraOptions: object
-) => {
-  let result = await baseQuery(args, api, extraOptions);
+interface RefreshResponse {
+  accessToken: string;
+}
 
-  if ((result?.error as FetchBaseQueryError)?.status === 403) {
-    console.log("sending refresh token");
-    // send refresh token to get new access token
-    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extra) => {
+  let result = await baseQuery(args, api, extra);
+  const status = result?.error?.status;
+  if (status === 403 || status === 401) {
+    const refreshResult = await baseQuery("/auth/refresh", api, {
+      isRefresh: true,
+    });
     if (refreshResult?.data) {
-      // store the new token
-      console.log(refreshResult.data);
-      //   api.dispatch(setToken(refreshResult.data));
-      // retry the original query with new access token
-      result = await baseQuery(args, api, extraOptions);
+      api.dispatch(
+        setTokens({
+          accessToken: (refreshResult.data as RefreshResponse).accessToken,
+        })
+      );
+      result = await baseQuery(args, api, extra);
     } else {
+      localStorage.removeItem("refresh");
       api?.dispatch(logout());
     }
   }
-
   return result;
 };
 

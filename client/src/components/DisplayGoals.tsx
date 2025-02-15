@@ -14,7 +14,7 @@ type Props = {
 const DisplayGoals = ({ category, timeframe }: Props) => {
   const [deleteGoal] = useDeleteGoalMutation();
   const [completeGoal] = useCompleteGoalMutation();
-  const { data: goals } = useGoalsQuery();
+  const { data: goals, isError } = useGoalsQuery();
 
   const filteredGoals = goals?.filter(
     (goal) =>
@@ -24,7 +24,10 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
 
   const handleCompleteGoal = async (id: string) => {
     try {
-      await completeGoal(id);
+      const result = await completeGoal(id);
+      if (result.error) {
+        return toast.error("An error occurred. Please try again.");
+      }
       toast.success("Goal completed, congrats!");
     } catch {
       toast.error("Something went wrong, please try again.");
@@ -33,12 +36,19 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
 
   const handleDeleteGoal = async (id: string) => {
     try {
-      await deleteGoal(id);
+      const result = await deleteGoal(id);
+      if (result.error) {
+        return toast.error("An error occurred. Please try again.");
+      }
       toast.info("Goal deleted successfully.");
     } catch {
       toast.error("Something went wrong, please try again.");
     }
   };
+
+  if (isError) {
+    return <div className="text-white">Error</div>;
+  }
 
   return (
     <div className="mt-8 sm:mt-0">
@@ -55,14 +65,14 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
               <div className="flex items-center px-3">
                 <input
                   type="checkbox"
-                  onChange={() => handleCompleteGoal(goal._id)}
+                  onChange={() => handleCompleteGoal(goal._id!)}
                   className="cursor-pointer text-blue-600 rounded focus:ring-blue-600 ring-offset-gray-700 focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 border-gray-500"
                 />
                 <label className="w-full py-3 mx-2 text-sm font-medium text-gray-300">
                   {goal.title}
                 </label>
                 <button
-                  onClick={() => handleDeleteGoal(goal._id)}
+                  onClick={() => handleDeleteGoal(goal._id!)}
                   className="cursor-pointer"
                 >
                   <FaTrashCan />

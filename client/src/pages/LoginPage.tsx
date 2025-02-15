@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { useLoginMutation } from "../api/auth";
-import { setToken } from "../state/authSlice";
+import { setTokens } from "../state/authSlice";
 
 const schema = z.object({
   email: z
@@ -34,7 +34,15 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<FormType> = async (data) => {
     try {
       const result = await login(data);
-      dispatch(setToken(result.data.token));
+      dispatch(
+        setTokens({
+          accessToken: result.data?.accessToken,
+          refreshToken: result.data?.refreshToken,
+        })
+      );
+      if (result.error) {
+        return toast.error("An error occurred. Please try again.");
+      }
       navigate("/dashboard/personal");
     } catch (err) {
       console.error(err);

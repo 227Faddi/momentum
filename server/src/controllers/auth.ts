@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { env } from '../config/index.js';
 import User from '../models/User.js';
 
@@ -15,33 +15,27 @@ export default {
     res.status(200).send(user);
   }),
   refresh: asyncHandler((req: Request, res: Response) => {
-    const cookies = req.cookies;
+    const authHeader = req.headers.authorization || req.headers.Authorization;
 
-    if (!cookies?.jwt) {
-      res.status(401).json({ message: 'Unauthorized' });
-      return;
+    if (!authHeader) {
+      res.status(403).json({ message: 'Authorization not provided' });
+      throw new Error('Missing token');
     }
 
-    const refreshToken = cookies.jwt;
-
+    const refreshToken = (authHeader as string).split(' ')[1];
     jwt.verify(
       refreshToken,
       env.JWT_REFRESH_TOKEN_SECRET,
-      async (err: Error | null, decoded: string | JwtPayload | undefined) => {
+      async (err: Error | null) => {
         if (err) {
           if (err.name === 'TokenExpiredError') {
-            res.clearCookie('jwt', {
-              httpOnly: true,
-              secure: true,
-              sameSite: 'none',
-            });
             return res.status(401).json({ message: 'Refresh token expired' });
           }
           return res.status(403).json({ message: 'Forbidden' });
         }
 
         const foundUser = await User.findOne({
-          id: (decoded as JwtPayload).id,
+          id: req.user,
         });
 
         if (!foundUser) {

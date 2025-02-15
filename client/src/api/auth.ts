@@ -1,16 +1,22 @@
 import { apiSlice } from ".";
 import type { User } from "../types";
 
+type Login = { email: string; password: string };
+
+type Signup = { email: string; password: string; confirmPassword: string };
+
+type Token = { accessToken: string; refreshToken: string };
+
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation({
+    login: builder.mutation<Token, Login>({
       query: (data) => ({
         url: "/auth/login",
         method: "POST",
         body: data,
       }),
     }),
-    signup: builder.mutation({
+    signup: builder.mutation<Token, Signup>({
       query: (data) => ({
         url: "/auth/signup",
         method: "POST",

@@ -9,13 +9,11 @@ type Props = {
 const FeatureCard = ({ icon, title, text }: Props) => {
   return (
     <div className="p-4">
-      <div className="rounded-full w-16 h-16 flex justify-center items-center text-indigo-500 shadow-2xl border border-indigo-500">
+      <div className="rounded-full w-16 h-16 flex justify-center items-center text-violet-500 shadow-2xl border border-violet-500">
         {icon}
       </div>
-      <h2 className="uppercase mt-6 text-indigo-500 font-medium mb-3">
-        {title}
-      </h2>
-      <p className="font-light text-sm text-gray-500 mb-3">{text}</p>
+      <h2 className="mt-6 text-lg font-medium mb-3">{title}</h2>
+      <p className="font-light sm:text-md text-gray-500 mb-3">{text}</p>
     </div>
   );
 };

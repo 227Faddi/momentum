@@ -4,14 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLoginMutation } from "../api/auth";
 import FeatureCard from "../components/ui/FeatureCard";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { setToken } from "../state/authSlice";
+import { setTokens } from "../state/authSlice";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
-  const setRefreshToken = useLocalStorage("refresh");
 
   const guest = {
     email: import.meta.env.VITE_GUEST_EMAIL,
@@ -21,8 +19,15 @@ const HomePage = () => {
   const handleLogin = async () => {
     try {
       const result = await login(guest);
-      dispatch(setToken(result.data.accessToken));
-      setRefreshToken.setItem(result.data.refreshToken);
+      dispatch(
+        setTokens({
+          accessToken: result.data?.accessToken,
+          refreshToken: result.data?.refreshToken,
+        })
+      );
+      if (result.error) {
+        return toast.error("An error occurred. Please try again.");
+      }
       navigate("/dashboard/personal");
     } catch (err) {
       console.error(err);
@@ -45,7 +50,7 @@ const HomePage = () => {
         </div>
         <div className="mt-16">
           <button
-            className="cursor-pointer text-white bg-gradient-to-r from-purple-400 via-purple-600 to-purple-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full"
+            className="cursor-pointer text-white bg-gradient-to-r from-gray-400 via-gray-600 to-gray-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 shadow-lg shadow-gray-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full"
             onClick={handleLogin}
           >
             {isLoading ? "Loading..." : "Try as a Guest"}
@@ -69,9 +74,11 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section className="flex flex-col items-center justify-center gap-12 py-24 max-w-5xl">
+      <section className="flex flex-col items-center justify-center gap-12 pt-24 max-w-5xl">
         <div className="p-8 text-center max-w-xl">
-          <h2 className="text-2xl sm:text-3xl">Why Momentum Works for You</h2>
+          <h2 className="text-2xl sm:text-3xl text">
+            Why Momentum Works for You
+          </h2>
           <p className="mt-6 text-lg font-light text-gray-500">
             Momentum helps you stay organized, focused, and motivated. It’s the
             simple, effective way to turn your plans into action.

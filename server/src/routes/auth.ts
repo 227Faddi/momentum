@@ -8,7 +8,7 @@ router.post('/login', authController.login);
 
 router.post('/signup', authController.signup);
 
-// router.post('/signup', authController.signup); //logout
+router.get('/refresh', authController.refresh);
 
 router.get('/me', protect, authController.me);
 
