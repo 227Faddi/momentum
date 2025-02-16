@@ -8,7 +8,6 @@ export const env = {
   CLIENT_URL: process.env.CLIENT_URL as string,
   NODE_ENV: process.env.NODE_ENV as string,
   DB_STRING: process.env.DB_STRING as string,
-  SESSION_SECRET: process.env.SESSION_SECRET as string,
   JWT_ACCESS_TOKEN_SECRET: process.env.JWT_ACCESS_TOKEN_SECRET as string,
   JWT_ACCESS_TOKEN_EXPIRATION: process.env
     .JWT_ACCESS_TOKEN_EXPIRATION as ms.StringValue,
