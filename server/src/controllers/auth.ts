@@ -1,13 +1,14 @@
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { env } from '../config/index.js';
 import User from '../models/User.js';
 
 export default {
   me: asyncHandler(async (req: Request, res: Response) => {
     const user = await User.findOne({ _id: req.user });
+
     if (!user) {
       res.status(404).json({ message: 'User not found' });
       return;
@@ -26,7 +27,7 @@ export default {
     jwt.verify(
       refreshToken,
       env.JWT_REFRESH_TOKEN_SECRET,
-      async (err: Error | null) => {
+      async (err: Error | null, decoded: string | JwtPayload | undefined) => {
         if (err) {
           if (err.name === 'TokenExpiredError') {
             return res.status(401).json({ message: 'Refresh token expired' });
@@ -34,9 +35,7 @@ export default {
           return res.status(403).json({ message: 'Forbidden' });
         }
 
-        const foundUser = await User.findOne({
-          id: req.user,
-        });
+        const foundUser = await User.findById((decoded as JwtPayload).id);
 
         if (!foundUser) {
           res.status(401).json({ message: 'Unauthorized' });

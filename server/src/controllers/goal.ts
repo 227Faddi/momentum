@@ -8,6 +8,14 @@ export default {
     res.status(200).json(goals);
   }),
 
+  getLeaderboard: asyncHandler(async (req, res) => {
+    const users = await User.find()
+      .sort({ points: -1 })
+      .limit(5)
+      .select('username email points');
+    res.status(200).json(users);
+  }),
+
   addGoal: asyncHandler(async (req, res) => {
     if (!req.body.title) {
       res.status(400).json({ message: 'Please add a title field' });
