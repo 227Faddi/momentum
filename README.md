@@ -1,17 +1,14 @@
-# [Momentum](https://momentum-n9xf.onrender.com/) - CRM for Freelancers
-
-https://github.com/user-attachments/assets/b2db95df-9e15-45f8-93fd-a1dd8bcb2121
+# [Momentum](https://momentumgoal.netlify.app) - Goal-Tracking Platform
 
 ## 📖 Description
 
-A custom CRM platform designed specifically for freelancers to organize leads, track their progress, and make data-driven decisions through comprehensive analytics with the assistance of AI.
+A goal-tracking platform that helps users set and achieve their goals. Users can categorize their goals into three types, earn points for completing them, and compete with others on the leaderboard.
 
 ## 📊 Features
 
-- AI-powered Insights & Messages
-- Sort & Filter Leads
-- Export to CSV
-- Visualize Data with Charts
+- Set and track short-term or long-term goals
+- Organize goals into three distinct categories
+- Earn points for completed goals and climb the leaderboard
 
 ## 🛠 Tech Stack
 
@@ -62,12 +59,14 @@ VITE_GUEST_PASSWORD=your_guest_password
 Create a .env file in the root directory and fill in the following values:
 
 ```
-PORT = ...
-DB_STRING = ...
-SESSION_SECRET = ...
-BASE_URL = ....
-CLIENT_URL = ...
-JWT_SECRET =  ...
+SERVER_PORT=your_server_port
+DB_STRING=your_mongodb_connection_string
+SERVER_URL=your_server_url
+CLIENT_URL=your_client_url
+JWT_ACCESS_TOKEN_SECRET=your_access_token_secret
+JWT_REFRESH_TOKEN_SECRET=your_refresh_token_secret
+JWT_ACCESS_TOKEN_EXPIRATION=your_access_token_expiration
+JWT_REFRESH_TOKEN_EXPIRATION=your_refresh_token_expiration
 ```
 
 ### ▶️ Running the Project
@@ -91,6 +90,33 @@ cd server
 ```
 npm run dev
 ```
+
+### 🚀 CI/CD Setup
+
+The project includes a CI/CD pipeline using GitHub Actions to automate deployment.
+
+1. Navigate to your repository on GitHub.
+
+2. Go to Settings > Secrets and variables > Actions.
+
+3. Click New repository secret and add the following secrets:
+
+Server:
+
+```
+VERCEL_ORG_ID=your_vercel_org_id
+VERCEL_PROJECT_ID=your_vercel_project_id
+VERCEL_TOKEN=your_vercel_token
+```
+
+Client:
+
+```
+NETLIFY_SITE_ID=your_netlify_site_id
+NETLIFY_TOKEN=your_netlify_token
+```
+
+Once added, GitHub Actions will use these secrets to deploy the project automatically.
 
 ## More
 
