@@ -15,6 +15,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["User"],
     }),
     signup: builder.mutation<Token, Signup>({
       query: (data) => ({
@@ -22,6 +23,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["User"],
     }),
     me: builder.query<User, void>({
       query: () => `/auth/me`,

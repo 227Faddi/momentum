@@ -92,7 +92,7 @@ const LoginPage = () => {
           >
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
-          <div className="text-sm font-medium text-gray-500 ">
+          <div className="text-sm font-medium text-gray-500 mt-3">
             Not registered?{" "}
             <Link to="/signup" className="text-violet-700 hover:underline">
               Create account

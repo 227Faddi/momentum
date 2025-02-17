@@ -1,40 +1,9 @@
 import { LuChartNoAxesColumn, LuCircleCheckBig, LuGoal } from "react-icons/lu";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useLoginMutation } from "../api/auth";
+import { Link } from "react-router-dom";
+import { GuestLogin } from "../components/GuestLogin";
 import FeatureCard from "../components/ui/FeatureCard";
-import { setTokens } from "../state/authSlice";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
-
-  const guest = {
-    email: import.meta.env.VITE_GUEST_EMAIL,
-    password: import.meta.env.VITE_GUEST_PASSWORD,
-  };
-
-  const handleLogin = async () => {
-    try {
-      const result = await login(guest);
-      dispatch(
-        setTokens({
-          accessToken: result.data?.accessToken,
-          refreshToken: result.data?.refreshToken,
-        })
-      );
-      if (result.error) {
-        return toast.error("An error occurred. Please try again.");
-      }
-      navigate("/dashboard/personal");
-    } catch (err) {
-      console.error(err);
-      toast.error("An error occurred. Please try again.");
-    }
-  };
-
   return (
     <div className="flex-1 flex flex-col items-center space-y-6 py-16 md:py-48 px-4">
       <section className="flex flex-col items-center justify-center">
@@ -48,13 +17,8 @@ const HomePage = () => {
             achieve. Start planning today and turn your goals into reality.
           </p>
         </div>
-        <div className="mt-16">
-          <button
-            className="cursor-pointer text-white bg-gradient-to-r from-gray-400 via-gray-600 to-gray-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 shadow-lg shadow-gray-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full"
-            onClick={handleLogin}
-          >
-            {isLoading ? "Loading..." : "Try as a Guest"}
-          </button>
+        <div className="mt-16 flex flex-col items-center">
+          <GuestLogin />
           <div className="w-full py-3 flex items-center text-gray-400 before:flex-1 before:border-t before:border-gray-300 before:me-6 after:flex-1 after:border-t after:border-gray-300 after:ms-6">
             or
           </div>
@@ -67,7 +31,7 @@ const HomePage = () => {
             </Link>
             <Link
               to="/signup"
-              className="text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 shadow-lg shadow-indigo-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Signup
             </Link>

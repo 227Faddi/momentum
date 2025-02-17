@@ -1,44 +1,19 @@
 import { FaFire } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useLoginMutation } from "../api/auth";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { logout, selectCurrentUser, setTokens } from "../state/authSlice";
+import { logout, selectCurrentUser } from "../state/authSlice";
+import { GuestLogin } from "./GuestLogin";
 
 const TopBar = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
-  const refreshToken = useLocalStorage("refresh");
+
   const user = useSelector(selectCurrentUser);
 
   const handleLogout = () => {
-    refreshToken.removeItem();
     dispatch(logout());
     navigate("/");
-  };
-
-  const guest = {
-    email: import.meta.env.VITE_GUEST_EMAIL,
-    password: import.meta.env.VITE_GUEST_PASSWORD,
-  };
-
-  const handleLogin = async () => {
-    try {
-      const result = await login(guest);
-      dispatch(
-        setTokens({
-          accessToken: result.data?.accessToken,
-          refreshToken: result.data?.refreshToken,
-        })
-      );
-      navigate("/dashboard");
-    } catch (err) {
-      console.error(err);
-      toast.error("An error occurred. Please try again.");
-    }
   };
 
   return (
@@ -58,12 +33,7 @@ const TopBar = () => {
           {pathname === "/" ? (
             <div className="flex gap-2"></div>
           ) : pathname === "/signup" || pathname === "/login" ? (
-            <button
-              className="cursor-pointer text-white bg-gradient-to-r from-purple-400 via-purple-600 to-purple-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              onClick={handleLogin}
-            >
-              {isLoading ? "Loading..." : "Try as a Guest"}
-            </button>
+            <GuestLogin />
           ) : (
             <>
               <h2>{user && user.username}</h2>

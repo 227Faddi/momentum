@@ -4,7 +4,7 @@ import { SocialLink } from "./ui/Button";
 
 const Footer = () => {
   return (
-    <footer className="mt-auto p-5 text-center text-gray-500">
+    <footer className="mt-40 sm:mt-auto  p-5 text-center text-gray-700">
       <div className="flex flex-col gap-5 md:flex-row justify-around items-center">
         <p className="mb-0 col">© 2024 Momentum. Moving forward together.</p>
         <div>

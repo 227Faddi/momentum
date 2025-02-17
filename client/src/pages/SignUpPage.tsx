@@ -21,7 +21,9 @@ const schema = z
       .max(30, { message: "Email cannot exceed 30 characters." })
       .trim()
       .toLowerCase(),
-    password: z.string().min(1, { message: "Password is required." }),
+    password: z
+      .string()
+      .min(8, { message: "Password must be at least 8 characters." }),
     confirmPassword: z.string(),
   })
   .refine(
@@ -69,7 +71,7 @@ const SignUpPage = () => {
   return (
     <div className="flex flex-col justify-center items-center flex-grow pb-5 my-10 px-12">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
-        <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="text-xl text-center font-medium text-gray-900">
             Sign up to Momentum
           </h1>
@@ -136,7 +138,7 @@ const SignUpPage = () => {
           >
             {isSubmitting ? "Logging in..." : "Signup"}
           </button>
-          <div className="text-sm font-medium text-gray-500 ">
+          <div className="text-sm font-medium text-gray-500 mt-3">
             Already have an account?{" "}
             <Link to="/login" className="text-violet-700 hover:underline">
               Login

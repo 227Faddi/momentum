@@ -1,4 +1,4 @@
-# [Momentum](https://momentumgoal.netlify.app) - Goal-Tracking Platform
+# [Momentum](https://momentumgoal.netlify.app) - Goal Tracking Platform
 
 ## 📖 Description
 
