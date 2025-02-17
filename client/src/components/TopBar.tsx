@@ -1,10 +1,10 @@
 import { FaFire } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLoginMutation, useMeQuery } from "../api/auth";
+import { useLoginMutation } from "../api/auth";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { logout, setTokens } from "../state/authSlice";
+import { logout, selectCurrentUser, setTokens } from "../state/authSlice";
 
 const TopBar = () => {
   const { pathname } = useLocation();
@@ -12,9 +12,7 @@ const TopBar = () => {
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
   const refreshToken = useLocalStorage("refresh");
-  const { data: user } = useMeQuery(undefined, {
-    skip: !pathname.startsWith("/dashboard"),
-  });
+  const user = useSelector(selectCurrentUser);
 
   const handleLogout = () => {
     refreshToken.removeItem();
@@ -74,7 +72,11 @@ const TopBar = () => {
                 {user && user.points}
               </div>
               <Link to="/add-goal">Add</Link>
-              <Link to="/leaderboard">Leaderboard</Link>
+              {pathname === "/leaderboard" ? (
+                <Link to="/dashboard/personal">Dashboard</Link>
+              ) : (
+                <Link to="/leaderboard">Leaderboard</Link>
+              )}
               <button onClick={handleLogout} className="cursor-pointer">
                 Logout
               </button>

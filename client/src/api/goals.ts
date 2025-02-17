@@ -1,4 +1,4 @@
-import type { Goal } from "../types";
+import type { Goal, User } from "../types";
 import { apiSlice } from "./index";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
@@ -7,7 +7,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: () => `/api/goals`,
       providesTags: ["Goals"],
     }),
-    addGoal: builder.mutation<unknown, Goal>({
+    addGoal: builder.mutation<unknown, Partial<Goal>>({
       query: (data) => ({
         url: `/api/goals`,
         method: "POST",
@@ -20,7 +20,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         url: `/api/goals/${id}/complete`,
         method: "PUT",
       }),
-      invalidatesTags: ["Goals", "User"],
+      invalidatesTags: ["Goals", "User", "Leaderboard"],
     }),
     deleteGoal: builder.mutation<unknown, string>({
       query: (id) => ({
@@ -28,6 +28,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: ["Goals"],
+    }),
+    leaderboard: builder.query<Partial<User[]>, void>({
+      query: () => `/api/goals/leaderboard`,
+      providesTags: ["Leaderboard"],
     }),
   }),
 });
@@ -37,4 +41,5 @@ export const {
   useAddGoalMutation,
   useCompleteGoalMutation,
   useDeleteGoalMutation,
+  useLeaderboardQuery,
 } = usersApiSlice;

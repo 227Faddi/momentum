@@ -9,6 +9,7 @@ import MainLayout from "./layouts/MainLayout";
 import AddGoalPage from "./pages/AddGoalPage";
 import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/HomePage";
+import LeaderboardPage from "./pages/LeaderboardPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -34,6 +35,7 @@ function App() {
             <Route path="/dashboard/career" element={<CareerTab />} />
           </Route>
           <Route path="/add-goal" element={<AddGoalPage />} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>

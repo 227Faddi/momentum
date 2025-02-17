@@ -39,7 +39,7 @@ const HomePage = () => {
     <div className="flex-1 flex flex-col items-center space-y-6 py-16 md:py-48 px-4">
       <section className="flex flex-col items-center justify-center">
         <div className="space-y-2 max-w-2xl text-center">
-          <h1 className="text-4xl sm:text-6xl">
+          <h1 className="text-4xl sm:text-6xl text-gray-700">
             Your Simple <span className="text-nowrap">Goal-Tracking</span>{" "}
             Platform
           </h1>
@@ -76,7 +76,7 @@ const HomePage = () => {
       </section>
       <section className="flex flex-col items-center justify-center gap-12 pt-24 max-w-5xl">
         <div className="p-8 text-center max-w-xl">
-          <h2 className="text-2xl sm:text-3xl text">
+          <h2 className="text-2xl sm:text-3xl text text-gray-700">
             Why Momentum Works for You
           </h2>
           <p className="mt-6 text-lg font-light text-gray-500">
