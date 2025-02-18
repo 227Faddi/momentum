@@ -18,7 +18,7 @@ const TopBar = () => {
 
   return (
     <nav className="py-6 sm:py-8 text-center">
-      <div className="sm:flex justify-around items-center">
+      <div className="flex flex-col sm:flex-row justify-around items-center">
         <h2 className="mb-0 text-3xl cursor-pointer">
           <Link to="/">
             <img
@@ -29,27 +29,31 @@ const TopBar = () => {
             Momentum
           </Link>
         </h2>
-        <div className="flex justify-center gap-10 px-2 sm:pt-0 pt-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-10 px-2 sm:pt-0 pt-8">
           {pathname === "/" ? (
             <div className="flex gap-2"></div>
           ) : pathname === "/signup" || pathname === "/login" ? (
             <GuestLogin />
           ) : (
             <>
-              <h2>{user && user.username}</h2>
-              <div className="flex items-center gap-1">
-                <FaFire />
-                {user && user.points}
+              <div className="flex items-center gap-3">
+                <h2>{user && user.username}</h2>
+                <div className="flex items-center">
+                  <FaFire />
+                  {user && user.points}
+                </div>
               </div>
-              <Link to="/add-goal">New</Link>
-              {pathname === "/leaderboard" ? (
-                <Link to="/dashboard/personal">Dashboard</Link>
-              ) : (
-                <Link to="/leaderboard">Leaderboard</Link>
-              )}
-              <button onClick={handleLogout} className="cursor-pointer">
-                Logout
-              </button>
+              <div className="flex items-center gap-5">
+                <Link to="/add-goal">New</Link>
+                {pathname === "/leaderboard" ? (
+                  <Link to="/dashboard/personal">Dashboard</Link>
+                ) : (
+                  <Link to="/leaderboard">Leaderboard</Link>
+                )}
+                <button onClick={handleLogout} className="cursor-pointer">
+                  Logout
+                </button>
+              </div>
             </>
           )}
         </div>
