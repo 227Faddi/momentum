@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
+import { errorHandler } from "../api";
 import { useLoginMutation } from "../api/auth";
 import { setTokens } from "../state/authSlice";
 
@@ -42,7 +43,8 @@ const LoginPage = () => {
         })
       );
       if (result.error) {
-        return toast.error("An error occurred. Please try again.");
+        errorHandler(result.error);
+        return;
       }
       navigate("/dashboard/personal");
     } catch (err) {

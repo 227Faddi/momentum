@@ -1,3 +1,4 @@
+import { SerializedError } from "@reduxjs/toolkit";
 import {
   BaseQueryFn,
   createApi,
@@ -5,6 +6,7 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
+import { toast } from "react-toastify";
 import { logout, setTokens } from "../state/authSlice";
 import { RootState } from "../state/store";
 
@@ -66,3 +68,13 @@ export const apiSlice = createApi({
   tagTypes: ["Goals", "User", "Leaderboard"],
   endpoints: () => ({}),
 });
+
+export const errorHandler = (error: FetchBaseQueryError | SerializedError) => {
+  if ("data" in error) {
+    const errorMessage =
+      (error.data as { message?: string })?.message ??
+      "An error occurred. Please try again.";
+    return toast.error(errorMessage);
+  }
+  return toast.error("An error occurred. Please try again.");
+};

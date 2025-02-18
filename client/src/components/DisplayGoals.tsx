@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { FaTrashCan } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import { errorHandler } from "../api";
 import {
   useCompleteGoalMutation,
   useDeleteGoalMutation,
@@ -15,7 +16,7 @@ type Props = {
 const DisplayGoals = ({ category, timeframe }: Props) => {
   const [deleteGoal] = useDeleteGoalMutation();
   const [completeGoal] = useCompleteGoalMutation();
-  const { data: goals, isError } = useGoalsQuery();
+  const { data: goals } = useGoalsQuery();
 
   const filteredGoals = goals?.filter(
     (goal) =>
@@ -27,7 +28,8 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
     try {
       const result = await completeGoal(id);
       if (result.error) {
-        return toast.error("An error occurred. Please try again.");
+        errorHandler(result.error);
+        return;
       }
       toast.success("Goal completed, congrats!");
     } catch {
@@ -39,17 +41,14 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
     try {
       const result = await deleteGoal(id);
       if (result.error) {
-        return toast.error("An error occurred. Please try again.");
+        errorHandler(result.error);
+        return;
       }
       toast.info("Goal deleted successfully.");
     } catch {
       toast.error("Something went wrong, please try again.");
     }
   };
-
-  if (isError) {
-    return <div className="text-white">Error</div>;
-  }
 
   return (
     <div className="mt-8 sm:mt-0 w-full p-2 sm:p-4 md:p-8">
