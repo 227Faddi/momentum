@@ -52,11 +52,11 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
   }
 
   return (
-    <div className="mt-8 sm:mt-0">
+    <div className="mt-8 sm:mt-0 w-full p-2 sm:p-4 md:p-8">
       <p className="text-xl mb-3 font-extrabold tracking-tight text-white">
         {timeframe}
       </p>
-      <ul className="overflow-hidden w-50 sm:w-60 text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white">
+      <ul className="overflow-hidden text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white">
         {filteredGoals && filteredGoals.length > 0 ? (
           filteredGoals.map((goal, index) => (
             <motion.li

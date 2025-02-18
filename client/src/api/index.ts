@@ -10,8 +10,6 @@ import { RootState } from "../state/store";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 
-console.log(serverUrl);
-
 interface ExtraOptions {
   isRefresh: boolean;
 }

@@ -36,9 +36,9 @@ const TopBar = () => {
             <GuestLogin />
           ) : (
             <>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <h2>{user && user.username}</h2>
-                <div className="flex items-center">
+                <div className="flex items-center gap-1">
                   <FaFire />
                   {user && user.points}
                 </div>
