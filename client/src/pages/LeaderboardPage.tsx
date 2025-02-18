@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { FaFire } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useLeaderboardQuery } from "../api/goals";
@@ -20,7 +21,11 @@ const LeaderboardPage = () => {
           <ul className="sm:text-lg font-medium border rounded-lg bg-gray-600 border-gray-600 text-white p-5 sm:space-y-2">
             {users.length > 0 ? (
               users.map((user, index) => (
-                <li
+                <motion.li
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  viewport={{ once: true }}
                   key={user?._id}
                   className={`w-full border-b last:border-b-0 border-gray-600 flex justify-between px-3 py-2 space-x-6`}
                 >
@@ -42,7 +47,7 @@ const LeaderboardPage = () => {
                   >
                     {user?.points} <FaFire />
                   </span>
-                </li>
+                </motion.li>
               ))
             ) : (
               <li className="text-gray-300 p-3 text-center">

@@ -41,7 +41,7 @@ const TopBar = () => {
                 <FaFire />
                 {user && user.points}
               </div>
-              <Link to="/add-goal">Add</Link>
+              <Link to="/add-goal">New</Link>
               {pathname === "/leaderboard" ? (
                 <Link to="/dashboard/personal">Dashboard</Link>
               ) : (

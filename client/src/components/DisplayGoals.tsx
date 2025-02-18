@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { FaTrashCan } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import {
@@ -57,8 +58,12 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
       </p>
       <ul className="overflow-hidden w-50 sm:w-60 text-sm font-medium border rounded-lg bg-gray-700 border-gray-600 text-white">
         {filteredGoals && filteredGoals.length > 0 ? (
-          filteredGoals.map((goal) => (
-            <li
+          filteredGoals.map((goal, index) => (
+            <motion.li
+              initial={{ opacity: 0, y: 5 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              viewport={{ once: true }}
               key={goal._id}
               className="w-full border-b rounded-t-lg border-gray-600"
             >
@@ -78,7 +83,7 @@ const DisplayGoals = ({ category, timeframe }: Props) => {
                   <FaTrashCan />
                 </button>
               </div>
-            </li>
+            </motion.li>
           ))
         ) : (
           <li className="text-gray-300 p-2">No goals available.</li>

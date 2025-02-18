@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "motion/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -71,7 +72,14 @@ const SignUpPage = () => {
   return (
     <div className="flex flex-col justify-center items-center flex-grow pb-5 my-10 px-12">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
-        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <motion.form
+          className="space-y-4"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <h1 className="text-xl text-center font-medium text-gray-900">
             Sign up to Momentum
           </h1>
@@ -144,7 +152,7 @@ const SignUpPage = () => {
               Login
             </Link>
           </div>
-        </form>
+        </motion.form>
       </div>
     </div>
   );

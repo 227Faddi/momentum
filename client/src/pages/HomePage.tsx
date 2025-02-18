@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { LuChartNoAxesColumn, LuCircleCheckBig, LuGoal } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { GuestLogin } from "../components/GuestLogin";
@@ -7,7 +8,13 @@ const HomePage = () => {
   return (
     <div className="flex-1 flex flex-col items-center space-y-6 py-16 md:py-48 px-4">
       <section className="flex flex-col items-center justify-center">
-        <div className="space-y-2 max-w-2xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="space-y-2 max-w-2xl text-center"
+        >
           <h1 className="text-4xl sm:text-6xl text-gray-700">
             Your Simple <span className="text-nowrap">Goal-Tracking</span>{" "}
             Platform
@@ -16,7 +23,7 @@ const HomePage = () => {
             Set goals, track progress, and earn rewards for every milestone you
             achieve. Start planning today and turn your goals into reality.
           </p>
-        </div>
+        </motion.div>
         <div className="mt-16 flex flex-col items-center">
           <GuestLogin />
           <div className="w-full py-3 flex items-center text-gray-400 before:flex-1 before:border-t before:border-gray-300 before:me-6 after:flex-1 after:border-t after:border-gray-300 after:ms-6">
