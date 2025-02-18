@@ -1,9 +1,5 @@
 name: CI/CD with Netlify
 
-env:
-  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-  NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-
 on:
   push:
     branches:
@@ -39,40 +35,3 @@ jobs:
       - name: Build Project
         working-directory: ./client
         run: npm run build
-
-  CD:
-    needs: CI
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install Netlify
-        run: npm install netlify-cli --save-dev
-
-      - name: Install dependencies
-        working-directory: ./client
-        run: npm ci
-
-      - name: Build project
-        working-directory: ./client
-        env:
-          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
-          VITE_GUEST_EMAIL: ${{ secrets.VITE_GUEST_EMAIL }}
-          VITE_GUEST_PASSWORD: ${{ secrets.VITE_GUEST_PASSWORD }}
-        run: npm run build
-
-      - name: Deploy to Netlify
-        working-directory: ./client
-        run: |
-          netlify deploy \
-            --prod \
-            --dir dist \
-            --site ${{ secrets.NETLIFY_SITE_ID }} \
-            --auth ${{ secrets.NETLIFY_TOKEN }}
