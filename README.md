@@ -1,5 +1,7 @@
 # [Momentum](https://momentumgoal.netlify.app) - Goal Tracking Platform
 
+https://github.com/user-attachments/assets/6dfbe639-aeed-4494-9582-37a9c64a6f5a
+
 ## 📖 Description
 
 A goal-tracking platform that helps users set and achieve their goals. Users can categorize their goals into three types, earn points for completing them, and compete with others on the leaderboard.
@@ -107,13 +109,6 @@ Server:
 VERCEL_ORG_ID=your_vercel_org_id
 VERCEL_PROJECT_ID=your_vercel_project_id
 VERCEL_TOKEN=your_vercel_token
-```
-
-Client:
-
-```
-NETLIFY_SITE_ID=your_netlify_site_id
-NETLIFY_TOKEN=your_netlify_token
 ```
 
 Once added, GitHub Actions will use these secrets to deploy the project automatically.
