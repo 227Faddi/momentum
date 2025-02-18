@@ -54,7 +54,7 @@ jobs:
           node-version: 20
 
       - name: Install Netlify
-        run: npm install netlify-cli@17.10.1 -g
+        run: npm install netlify-cli --save-dev
 
       - name: Install dependencies
         working-directory: ./client
@@ -62,6 +62,10 @@ jobs:
 
       - name: Build project
         working-directory: ./client
+        env:
+          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          VITE_GUEST_EMAIL: ${{ secrets.VITE_GUEST_EMAIL }}
+          VITE_GUEST_PASSWORD: ${{ secrets.VITE_GUEST_PASSWORD }}
         run: npm run build
 
       - name: Deploy to Netlify
